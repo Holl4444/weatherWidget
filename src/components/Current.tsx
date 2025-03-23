@@ -19,18 +19,21 @@ export default function Current() {
     const currentTemp = Math.round(weatherData.list[0].main.temp - weatherData.list[0].main.temp_kf);
    
     return (
-      <>
+      <div className={styles.current}>
         <div className={styles.todayContainer}>
-          <p>{currentTime}</p>
+          <p>Today {currentTime}</p>
           <Icon icon={nowIcon} description={description} />
         </div>
         <div className={styles.extrasContainer}>
+          <p>{description}</p>
           <div className={styles.tempWindContainer}>
-            <p>{currentTemp}</p> 
-            <Wind />        
+            <p>{currentTemp}°C</p>
+            <Wind />
           </div>
-          <LaterToday />
+          <div className={styles.updatesToday}>
+            <LaterToday />
+          </div>
         </div>
-      </>
+      </div>
     );
 }

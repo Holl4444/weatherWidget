@@ -1,5 +1,8 @@
 import { useWeather } from '../App';
 import Icon from './Icon';
+import styles from './WeekAhead.module.css'
+
+console.log('Styles object:', styles);
 
 interface WeatherItem {
   icon: string;
@@ -78,11 +81,11 @@ export default function WeekAhead() {
           .slice(0, 1)
           .toUpperCase()}${item.description.slice(1)}`;
           const id: string = `item${item.date}`;
-          const dayDate: string = `${item.date.slice(8, 2)}`
+          const dayDate: string = `${id.slice(-2)}`;
         return (
-          <div key={id}> {/* Had to add div due to needing the key at top level */}
+          <div key={id} className={styles.weekDays}> {/* Had to add div due to needing the key at top level */}
             <p>{dayDate}</p>
-            <Icon id={id} icon={icon} description={weatherInfo} />
+            <Icon id={id} icon={icon} description={weatherInfo} className={styles.weekday} />
           </div>
         );
       })}

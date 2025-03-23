@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import './App.module.css';
+import styles from './App.module.css';
 import Current from './components/Current';
 import WeekAhead from './components/WeekAhead';
 import { ThreeHourResponse } from './utils/Types'; // Type for API data
@@ -63,10 +63,10 @@ const App = () => {
       ) : !weatherData ? (
         <div>No weatherData available</div>
       ) : (
-        <>
+        <div className={styles.weatherContainer}>
           <Current />
           <WeekAhead />
-        </>
+        </div>
       )}
     </WeatherContext.Provider>
   );

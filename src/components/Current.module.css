@@ -1,0 +1,16 @@
+.current {
+    display: flex;
+}
+.todayContainer {
+    height: 7rem;
+}
+
+.extrasContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.updatesToday {
+    display: flex;
+}
