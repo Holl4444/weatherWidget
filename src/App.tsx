@@ -37,6 +37,7 @@ const App = () => {
   }, []);
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
+    if (!data) return <div>No data available</div>; // Stops TS being unhappy that there might not be data in return
 
     return <Current weatherData={data} />;
 }
