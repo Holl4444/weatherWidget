@@ -1,15 +1,16 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import './App.module.css';
 import Current from './components/Current';
-import { ThreeHourResponse } from './utils/Types';
+import { ThreeHourResponse } from './utils/Types'; // Type for API data
 
 interface WeatherContextType {
   weatherData: ThreeHourResponse | undefined;
   error: string | null;
 }
 
-const WeatherContext = createContext<WeatherContextType | undefined>(undefined); //our context hook
+const WeatherContext = createContext<WeatherContextType | undefined>(undefined); // Creates context for the hook useWeather - undefined is the default value - this is where the .Provider container component comes from
 
+// export the hook to be used in other components
 export function useWeather() {
   const context = useContext(WeatherContext);
   if (!context) {
@@ -50,7 +51,7 @@ const App = () => {
     };
     apiCall();
   }, []);
-  // Wrap everything we need elsewhere in context provider
+  // Wrap everything we need elsewhere in context provider. Everything in here will be able to access useWeather hook and therefore weatherData and error
   return (
     <WeatherContext.Provider value={{ weatherData, error }}>
       {loading ? (
