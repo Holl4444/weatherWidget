@@ -21,13 +21,13 @@ export default function Current() {
     return (
       <div className={styles.current}>
         <div className={styles.todayContainer}>
-          <p>Today {currentTime}</p>
-          <Icon icon={nowIcon} description={description} />
+          <p className={styles.currentTimeText}>Today {currentTime}</p>
+          <Icon icon={nowIcon} description={description} className={styles.nowIcon} />
         </div>
         <div className={styles.extrasContainer}>
-          <p>{description}</p>
+          <p className={styles.currentWeatherText}>{description}</p>
           <div className={styles.tempWindContainer}>
-            <p>{currentTemp}°C</p>
+            <p className={styles.temp}>{currentTemp}°C</p>
             <Wind />
           </div>
           <div className={styles.updatesToday}>

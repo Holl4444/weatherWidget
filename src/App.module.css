@@ -1,4 +1,5 @@
 .weatherContainer {
-    height: 7rem;
+    height: 8rem;
+    width: fit-content;
     display: flex;
 }

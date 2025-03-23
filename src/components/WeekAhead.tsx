@@ -1,6 +1,6 @@
 import { useWeather } from '../App';
 import Icon from './Icon';
-import styles from './WeekAhead.module.css'
+import styles from './WeekAhead.module.css';
 
 console.log('Styles object:', styles);
 
@@ -74,22 +74,27 @@ export default function WeekAhead() {
     weekAheadIcons.push(averageIcon);
   }
   return (
-    <>
+    <div className={styles.weekDaysContainer}>
       {weekAheadIcons.map((item) => {
         const icon = item.icon;
         const weatherInfo: string = `${item.description
           .slice(0, 1)
           .toUpperCase()}${item.description.slice(1)}`;
-          const id: string = `item${item.date}`;
-          const dayDate: string = `${id.slice(-2)}`;
+        const id: string = `item${item.date}`;
+        const dayDate: string = `${id.slice(-2)}`;
         return (
-          <div key={id} className={styles.weekDays}> {/* Had to add div due to needing the key at top level */}
+          <div key={id} className={styles.weekDays}>
             <p>{dayDate}</p>
-            <Icon id={id} icon={icon} description={weatherInfo} className={styles.weekday} />
+            <Icon
+              id={id}
+              icon={icon}
+              description={weatherInfo}
+              className={styles.weekday}
+            />
           </div>
         );
       })}
-    </>
+    </div>
   );
 }
 

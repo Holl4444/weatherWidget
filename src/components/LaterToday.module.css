@@ -1,3 +1,5 @@
 .later {
-    height: 4rem;
+    height: 2rem;
+    background-color: #e9e7e7;
+    box-shadow: 0 1px 2px 1px #c7c4c4;
 }
