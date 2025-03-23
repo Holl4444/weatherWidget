@@ -1,10 +1,25 @@
-import { useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import './App.module.css';
 import Current from './components/Current';
 import { ThreeHourResponse } from './utils/Types';
 
+interface WeatherContextType {
+  weatherData: ThreeHourResponse | undefined;
+  error: string | null;
+}
+
+const WeatherContext = createContext<WeatherContextType | undefined>(undefined); //our context hook
+
+export function useWeather() {
+  const context = useContext(WeatherContext);
+  if (!context) {
+    throw new Error('useWeather must be used within WeatherProvider');
+  }
+  return context;
+}
+
 const App = () => {
-  const [data, setData] = useState<ThreeHourResponse>();
+  const [weatherData, setWeatherData] = useState<ThreeHourResponse>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   // Fetch weather info as though from a real API:
@@ -20,7 +35,7 @@ const App = () => {
           throw new Error(`Error: ${response.status}`);
         }
         const result = await response.json();
-        setData(result)
+        setWeatherData(result);
       } catch (err) {
         console.log(err);
         // Handle the unknown type error safely
@@ -35,11 +50,20 @@ const App = () => {
     };
     apiCall();
   }, []);
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
-    if (!data) return <div>No data available</div>; // Stops TS being unhappy that there might not be data in return
-
-    return <Current weatherData={data} />;
+  // Wrap everything we need elsewhere in context provider
+  return (
+    <WeatherContext.Provider value={{ weatherData, error }}>
+      {loading ? (
+        <div>Loading...</div>
+      ) : error ? (
+        <div>Error: {error}</div>
+      ) : !weatherData ? (
+        <div>No weatherData available</div>
+      ) : (
+        <Current />
+      )}
+    </WeatherContext.Provider>
+  );
 }
 
 export default App;
