@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import './App.module.css';
 import Current from './components/Current';
+import WeekAhead from './components/WeekAhead';
 import { ThreeHourResponse } from './utils/Types'; // Type for API data
 
 interface WeatherContextType {
@@ -36,6 +37,7 @@ const App = () => {
           throw new Error(`Error: ${response.status}`);
         }
         const result = await response.json();
+        console.log(result);
         setWeatherData(result);
       } catch (err) {
         console.log(err);
@@ -61,7 +63,10 @@ const App = () => {
       ) : !weatherData ? (
         <div>No weatherData available</div>
       ) : (
-        <Current />
+        <>
+          <Current />
+          <WeekAhead />
+        </>
       )}
     </WeatherContext.Provider>
   );

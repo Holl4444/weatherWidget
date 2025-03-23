@@ -3,6 +3,7 @@ import styles from './Icon.module.css';
 interface IconProps {
   icon: string;
   description: string;
+  id?: string;
 }
 
 export default function Icon({ icon, description }: IconProps) {

@@ -2,6 +2,7 @@ import Icon from './Icon';
 import styles from './Current.module.css';
 import { useWeather } from '../App';
 import Wind from './Wind';
+import LaterToday from './LaterToday';
 
 
 // Creates an icon using its weather description as alt text
@@ -16,6 +17,7 @@ export default function Current() {
       1
         )}`;
     const currentTemp = Math.round(weatherData.list[0].main.temp - weatherData.list[0].main.temp_kf);
+   
     return (
       <>
         <div className={styles.todayContainer}>
@@ -24,9 +26,10 @@ export default function Current() {
         </div>
         <div className={styles.extrasContainer}>
           <div className={styles.tempWindContainer}>
-                    <p>{currentTemp}</p> 
+            <p>{currentTemp}</p> 
             <Wind />        
           </div>
+          <LaterToday />
         </div>
       </>
     );
