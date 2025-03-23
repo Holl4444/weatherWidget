@@ -1,0 +1,1 @@
+Where I got the API response Type declaration - https://www.npmjs.com/package/openweathermap-ts
