@@ -1,5 +1,3 @@
-import styles from './Icon.module.css';
-
 interface IconProps {
   icon: string;
   description: string;
