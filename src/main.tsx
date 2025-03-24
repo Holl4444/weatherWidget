@@ -3,6 +3,18 @@ import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.module.css';
 
+// Define type for the widget initialization function
+interface InitWidgetFunction {
+  (config: { container: Element | string }): void;
+}
+
+// Define augmentation for Window interface
+declare global {
+  interface Window {
+    initWeatherWidget: InitWidgetFunction;
+  }
+}
+
 //For standalone use
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -10,10 +22,8 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>
 );
 
-//embeds widget when called by the one liner!
-window.initWeatherWidget = function (config: {
-  container: Element | string;
-}) {
+// IMPORTANT: Explicitly export to global scope
+export function initWidget(config: { container: Element | string }) {
   const container =
     typeof config.container === 'string'
       ? document.getElementById(config.container)
@@ -27,18 +37,12 @@ window.initWeatherWidget = function (config: {
       console.error(error);
     }
   }
-};
-
-// TypeScript declaration: Typescript doesn't know about properties added to global objects, like window, unless you declare them. This is after the embed call as it is only used by Typescript at compile time. Hoisted.
-declare global {
-  interface Window {
-    initWeatherWidget: (config: {
-      container: Element | string;
-    }) => void;
-  }
 }
 
-console.log(
-  'initWeatherWidget is available:',
-  !!window.initWeatherWidget
-);
+// Directly attach to window using a more reliable method
+if (typeof window !== 'undefined') {
+  console.log('Explicitly attaching initWeatherWidget to global window');
+  window.initWeatherWidget = initWidget;
+}
+
+console.log('initWeatherWidget is available:', !!window.initWeatherWidget);

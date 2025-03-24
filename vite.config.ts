@@ -1,17 +1,19 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
   build: {
     rollupOptions: {
       output: {
-        // This ensures globals are properly exposed
         format: 'iife',
-        // Alternatively try 'umd'
-        // format: 'umd',
-        // name: 'WeatherWidget'
+        // This is critical - expose your function as a global
+        name: 'WeatherWidget',
+        extend: true,
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+        },
       },
     },
   },
