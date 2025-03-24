@@ -1,4 +1,3 @@
-// This is the one-line embed script that websites can include
 
 (function () { 
   // Create container
