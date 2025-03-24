@@ -45,7 +45,7 @@ const reactScript = document.createElement('script');
       const script = document.createElement('script');
       script.type = 'text/javascript';
       script.src =
-        'https://weather-widget-pied.vercel.app/assets/index-C1R6rzEN.js';
+        'https://weather-widget-pied.vercel.app/assets/index-BTg2NuQG.js';
 
       script.onload = function () {
         console.log('Bundle loaded, checking globals:', {
