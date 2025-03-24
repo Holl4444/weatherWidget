@@ -12,9 +12,34 @@
   testElement.style.fontFamily = 'Arial, sans-serif';
   testElement.textContent = 'Weather Widget Placeholder';
 
-  // Add it to the page
-  document.currentScript.insertAdjacentElement(
-    'afterend',
-    testElement
-  );
+  // More reliable insertion method
+  try {
+    // Method 1: Try currentScript first
+    if (document.currentScript) {
+      document.currentScript.insertAdjacentElement(
+        'afterend',
+        testElement
+      );
+      console.log('Inserted using currentScript');
+    }
+    // Method 2: Find the script element
+    else {
+      const scripts = document.getElementsByTagName('script');
+      for (let i = 0; i < scripts.length; i++) {
+        if (scripts[i].src.includes('widget.js')) {
+          scripts[i].parentNode.insertBefore(
+            testElement,
+            scripts[i].nextSibling
+          );
+          console.log('Inserted using script tag search');
+          break;
+        }
+      }
+    }
+  } catch (e) {
+    // Method 3: Last resort - append to body
+    console.error('Error inserting element:', e);
+    document.body.appendChild(testElement);
+    console.log('Inserted as body child');
+  }
 })();
