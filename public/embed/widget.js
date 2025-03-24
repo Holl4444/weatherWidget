@@ -19,17 +19,28 @@
   // Store direct reference to container element
   const containerElement = container;
 
-  // Load the main bundle directly - UPDATED BUNDLE NAME
-  const script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src =
-    'https://weather-widget-pied.vercel.app/assets/index-CpeRyiFh.js';
-
-  script.onload = function () {
-    console.log(
-      'Bundle loaded, checking for initWeatherWidget:',
-      !!window.initWeatherWidget
-    );
+  // First load React and ReactDOM
+  const reactScript = document.createElement('script');
+  reactScript.src = 'https://unpkg.com/react@18/umd/react.production.min.js';
+  
+  const reactDomScript = document.createElement('script');
+  reactDomScript.src = 'https://unpkg.com/react-dom@18/umd/react-dom.production.min.js';
+  
+  // After React is loaded, load our bundle
+  reactDomScript.onload = function() {
+    console.log('React and ReactDOM loaded');
+    
+    // Now load the main bundle
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src =
+      'https://weather-widget-pied.vercel.app/assets/index-_BmJhFTO.js';
+    
+    script.onload = function () {
+      console.log(
+        'Bundle loaded, checking for initWeatherWidget:',
+        !!window.initWeatherWidget
+      );
 
     // Debug what global functions might exist
     const potentialWidgetFns = Object.keys(window).filter(
@@ -72,6 +83,11 @@
       console.error('initWeatherWidget not found in global scope!');
     }
   };
+    
+    document.body.appendChild(script);
+  };
 
-  document.body.appendChild(script);
+  // Load React first, then ReactDOM will load
+  document.head.appendChild(reactScript);
+  document.head.appendChild(reactDomScript);
 })();
