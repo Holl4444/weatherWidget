@@ -15,7 +15,12 @@ export default defineConfig({
           react: 'React',
           'react-dom': 'ReactDOM',
         },
+        // Add these new options
+        exports: 'named',
+        inlineDynamicImports: true,
       },
+      // Try to expose initWeatherWidget directly
+      preserveEntrySignatures: 'exports-only',
     },
   },
 });

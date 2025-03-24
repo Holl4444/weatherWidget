@@ -52,27 +52,19 @@ if (typeof window !== 'undefined') {
 
 console.log('About to expose initWeatherWidget globally');
 
-// Force global exposure with multiple approaches
-try {
-  // For globalThis, use a safer approach that TypeScript won't complain about
-  if (typeof globalThis !== 'undefined') {
-    Object.defineProperty(globalThis, 'initWeatherWidget', {
-      value: initWidget,
-      writable: true,
-      configurable: true
-    });
+const exposeGlobalFunction = () => {
+  try {
+    // Create a non-module script that will run in global context
+    const globalScript = document.createElement('script');
+    globalScript.textContent = `
+      window.initWeatherWidget = ${initWidget.toString()};
+      console.log("Global exposure of initWeatherWidget via script:", !!window.initWeatherWidget);
+    `;
+    document.head.appendChild(globalScript);
+  } catch (e) {
+    console.error("Failed to expose global function:", e);
   }
-  
-  // For window, both direct assignment and defineProperty
-  window.initWeatherWidget = initWidget; // This is fine because we declared it
-  
-  Object.defineProperty(window, 'initWeatherWidget', {
-    value: initWidget,
-    writable: true,
-    configurable: true,
-  });
-  
-  console.log('initWeatherWidget exposed via multiple methods');
-} catch (e) {
-  console.error('Failed to expose initWeatherWidget:', e);
-}
+};
+
+// Run it immediately
+exposeGlobalFunction();
