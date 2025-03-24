@@ -5,14 +5,17 @@
   // Create iframe container
   const container = document.createElement('div');
 
-  // Set iframe HTML - directly loading the root URL
-  container.innerHTML = `
-    <iframe 
-      src="https://weather-widget-pied.vercel.app/" 
-      style="border:none; width:300px; height:150px; overflow:hidden;" 
-      title="Weather Widget">
-    </iframe>
-  `;
+  // Create iframe element using DOM methods
+  const iframe = document.createElement('iframe');
+  iframe.src = 'https://weather-widget-pied.vercel.app/';
+  iframe.style.border = 'none';
+  iframe.style.width = '300px';
+  iframe.style.height = '150px';
+  iframe.style.overflow = 'hidden';
+  iframe.title = 'Weather Widget';
+
+  // Append iframe to container
+  container.appendChild(iframe);
 
   // Insert after script tag
   document.currentScript.insertAdjacentElement('afterend', container);

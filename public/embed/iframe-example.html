@@ -6,9 +6,37 @@
   <body>
     <h1>Weather Widget Demo (iframe)</h1>
 
-    <!-- Use iframe approach instead -->
-    <script src="https://weather-widget-pied.vercel.app/embed/embed.js"></script>
+    <!-- Use embed.js from local path during development -->
+    <script>
+      // Simple embedding script using iframe
+      (function() {
+        console.log('Iframe embedding script starting');
+        
+        // Create iframe container
+        const container = document.createElement('div');
+        
+        // Set iframe HTML - directly loading the root URL
+        container.innerHTML = `
+          <iframe 
+            src="https://weather-widget-pied.vercel.app/embed/iframe.js" 
+            style="border:none; width:300px; height:150px; overflow:hidden;" 
+            title="Weather Widget">
+          </iframe>
+        `;
+        
+        // Insert after script tag
+        document.currentScript.insertAdjacentElement('afterend', container);
+        
+        console.log('Iframe embedded successfully');
+      })();
+    </script>
 
     <p>Content after the widget...</p>
+    
+    <h2>Embed Code:</h2>
+<h2>Embed Code:</h2>
+<pre>
+&lt;script src="https://weather-widget-pied.vercel.app/embed/iframe.js"&gt;&lt;/script&gt;
+</pre>
   </body>
 </html>

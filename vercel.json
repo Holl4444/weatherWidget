@@ -13,8 +13,8 @@
       }
     },
     {
-      "src": "/embed/embed.js",
-      "dest": "/embed/embed.js",
+      "src": "/embed/iframe.js",
+      "dest": "/embed/iframe.js",
       "headers": {
         "Content-Type": "application/javascript",
         "Cache-Control": "no-cache, no-store, must-revalidate"
