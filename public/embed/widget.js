@@ -24,86 +24,111 @@
 
   // First load React and ReactDOM
   // Use specific versions to ensure compatibility
-  const reactScript = document.createElement('script');
-  reactScript.src =
-    'https://unpkg.com/react@18.3.1/umd/react.production.min.js';
+const reactScript = document.createElement('script');
+  reactScript.src = 'https://unpkg.com/react@18.3.1/umd/react.production.min.js';
+  
+  reactScript.onload = function () {
+    console.log('✓ React core loaded, window.React:', !!window.React);
 
-  const reactDomClientScript = document.createElement('script');
-  reactDomClientScript.src =
-    'https://unpkg.com/react-dom@18.3.1/client/umd/react-dom-client.production.min.js';
+    // Only load ReactDOM after React loads successfully
+    const reactDomClientScript = document.createElement('script');
+    reactDomClientScript.src =
+      'https://unpkg.com/react-dom@18.3.1/client/umd/react-dom-client.production.min.js';
 
-  // After React and ReactDOM client are loaded, load our bundle
-  reactDomClientScript.onload = function () {
-    console.log('React and ReactDOM client loaded');
-
-    // Now load the main bundle
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src =
-      'https://weather-widget-pied.vercel.app/assets/index-BrSWBZU4.js';
-
-  script.onload = function () {
-    console.log(
-      'Bundle loaded, checking for initWeatherWidget:',
-      !!window.initWeatherWidget,
-      'WeatherWidgetAppComponent:',
-      !!window.WeatherWidgetAppComponent
-    );
-
-    // Debug what global functions might exist
-    const potentialWidgetFns = Object.keys(window).filter(
-      (k) =>
-        typeof window[k] === 'function' &&
-        (k.includes('widget') || k.includes('Widget'))
-    );
-    console.log('Potential widget functions:', potentialWidgetFns);
-
-    // Check if WeatherWidget has properties
-    if (window.WeatherWidget) {
+    reactDomClientScript.onload = function () {
       console.log(
-        'Found WeatherWidget global:',
-        window.WeatherWidget
+        '✓ ReactDOM client loaded, window.ReactDOM:',
+        !!window.ReactDOM
       );
-    }
 
-    // Add more detailed debugging
-    if (window.initWeatherWidget) {
-      try {
-        console.log('About to initialize widget:', {
-          containerExists: !!containerElement,
-          containerId: containerElement.id,
-          containerInDom: !!document.getElementById(
-            containerElement.id
-          ),
+      // Only load bundle after both React and ReactDOM load
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src =
+        'https://weather-widget-pied.vercel.app/assets/index-BrSWBZU4.js';
+
+      script.onload = function () {
+        console.log('Bundle loaded, checking globals:', {
+          hasReact: !!window.React,
+          hasReactDOM: !!window.ReactDOM,
+          hasInit: !!window.initWeatherWidget,
         });
 
-        window.initWeatherWidget({
-          container: containerElement,
-        });
+        // Debug what global functions might exist
+        const potentialWidgetFns = Object.keys(window).filter(
+          (k) =>
+            typeof window[k] === 'function' &&
+            (k.includes('widget') || k.includes('Widget'))
+        );
+        console.log(
+          'Potential widget functions:',
+          potentialWidgetFns
+        );
 
-        console.log('Widget initialized, checking container:', {
-          hasChildren: containerElement.children.length > 0,
-          innerHTML: containerElement.innerHTML,
-        });
-      } catch (e) {
-        console.error('Error initializing with direct reference:', e);
-
-        // Try with getElementById as fallback
-        try {
-          console.log('Trying with getElementById fallback');
-          window.initWeatherWidget({
-            container: document.getElementById(uniqueId),
-          });
-        } catch (e2) {
-          console.error('Both initialization methods failed:', e2);
+        // Check if WeatherWidget has properties
+        if (window.WeatherWidget) {
+          console.log(
+            'Found WeatherWidget global:',
+            window.WeatherWidget
+          );
         }
-      }
-    } else {
-      console.error('initWeatherWidget not found in global scope!');
-    }
+
+        // Add more detailed debugging
+        if (window.initWeatherWidget) {
+          try {
+            console.log('About to initialize widget:', {
+              containerExists: !!containerElement,
+              containerId: containerElement.id,
+              containerInDom: !!document.getElementById(
+                containerElement.id
+              ),
+            });
+
+            window.initWeatherWidget({
+              container: containerElement,
+            });
+
+            console.log('Widget initialized, checking container:', {
+              hasChildren: containerElement.children.length > 0,
+              innerHTML: containerElement.innerHTML,
+            });
+          } catch (e) {
+            console.error(
+              'Error initializing with direct reference:',
+              e
+            );
+
+            // Try with getElementById as fallback
+            try {
+              console.log('Trying with getElementById fallback');
+              window.initWeatherWidget({
+                container: document.getElementById(uniqueId),
+              });
+            } catch (e2) {
+              console.error(
+                'Both initialization methods failed:',
+                e2
+              );
+            }
+          }
+        } else {
+          console.error(
+            'initWeatherWidget not found in global scope!'
+          );
+        }
+      };
+
+      document.body.appendChild(script);
+    };
+    reactDomClientScript.onerror = function (e) {
+      console.error('✗ ReactDOM client failed to load:', e);
+    };
+
+    document.head.appendChild(reactDomClientScript);
   };
 
-    document.body.appendChild(script);
+  reactScript.onerror = function (e) {
+    console.error('✗ React core failed to load:', e);
   };
 
   // Load React first, then ReactDOM will load
