@@ -33,7 +33,7 @@ const reactScript = document.createElement('script');
     // Only load ReactDOM after React loads successfully
     const reactDomClientScript = document.createElement('script');
     reactDomClientScript.src =
-      'https://unpkg.com/react-dom@18.3.1/client/umd/react-dom-client.production.min.js';
+      'https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js';
 
     reactDomClientScript.onload = function () {
       console.log(
