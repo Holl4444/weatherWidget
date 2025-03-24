@@ -19,10 +19,10 @@
   // Store direct reference to container element
   const containerElement = container;
 
-  // Load the main bundle directly
+  // Load the main bundle directly - UPDATED BUNDLE NAME
   const script = document.createElement('script');
   script.src =
-    'https://weather-widget-pied.vercel.app/assets/index-DrkgXHZq.js';
+    'https://weather-widget-pied.vercel.app/assets/index-4P27zBKZ.js';
 
   script.onload = function () {
     console.log(
