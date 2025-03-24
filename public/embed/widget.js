@@ -1,40 +1,20 @@
 (function () {
-  console.log('Widget script starting');
+  console.log('Test widget running');
 
-  // Create container
-  const container = document.createElement('div');
-  container.id = 'weather-widget-container';
-  container.style.border = '1px solid red'; // Make it visible
-  document.currentScript.insertAdjacentElement('afterend', container);
+  // Create a visible element without any React dependencies
+  const testElement = document.createElement('div');
+  testElement.style.width = '200px';
+  testElement.style.height = '100px';
+  testElement.style.backgroundColor = 'red';
+  testElement.style.color = 'white';
+  testElement.style.padding = '20px';
+  testElement.style.margin = '20px';
+  testElement.style.fontFamily = 'Arial, sans-serif';
+  testElement.textContent = 'Weather Widget Placeholder';
 
-  // Load CSS
-  const link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.href =
-    'https://weather-widget-pied.vercel.app/assets/index-BJpt4Z0r.css';
-  document.head.appendChild(link);
-
-  // Load JS
-  const script = document.createElement('script');
-  script.src =
-    'https://weather-widget-pied.vercel.app/assets/index-B1ax72pw.js'; // Fixed duplicate
-  script.onload = function () {
-    console.log(
-      'Script loaded, initWeatherWidget exists:',
-      !!window.initWeatherWidget
-    );
-
-    // Get the container element
-    const containerEl = document.getElementById(
-      'weather-widget-container'
-    );
-    console.log('Container element:', containerEl);
-
-    if (window.initWeatherWidget && containerEl) {
-      window.initWeatherWidget({
-        container: containerEl, // Pass the DOM element
-      });
-    }
-  };
-  document.body.appendChild(script);
+  // Add it to the page
+  document.currentScript.insertAdjacentElement(
+    'afterend',
+    testElement
+  );
 })();
