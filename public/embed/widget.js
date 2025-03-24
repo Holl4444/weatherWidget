@@ -1,5 +1,5 @@
 (function () {
-  console.log('Widget script starting');
+  console.warn('🌤️ WEATHER WIDGET: Starting...'); // More visible logging
 
   // Create container with uniqueID
   const uniqueId = `weather-widget-${Date.now()}-${Math.floor(
@@ -9,13 +9,16 @@
   container.id = uniqueId;
 
   // Add visibility
-  container.style.border = '1px solid red'; // Make border visible
-  container.style.minHeight = '200px'; // Force some height
-  container.style.padding = '10px'; // Add some padding
-  container.style.margin = '10px 0'; // Add some margin
+  container.style.border = '1px solid red';
+  container.style.minHeight = '200px';
+  container.style.padding = '10px';
+  container.style.margin = '10px 0';
+  container.style.backgroundColor = '#f0f0f0'; // Light background to be more visible
 
   // Insert container into DOM
   document.currentScript.insertAdjacentElement('afterend', container);
+
+  console.warn('🌤️ WEATHER WIDGET: Created container:', uniqueId);
 
   console.log('Created container with ID:', uniqueId);
 
@@ -24,9 +27,10 @@
 
   // First load React and ReactDOM
   // Use specific versions to ensure compatibility
-const reactScript = document.createElement('script');
-  reactScript.src = 'https://unpkg.com/react@18.3.1/umd/react.production.min.js';
-  
+  const reactScript = document.createElement('script');
+  reactScript.src =
+    'https://unpkg.com/react@18.3.1/umd/react.production.min.js';
+
   reactScript.onload = function () {
     console.log('✓ React core loaded, window.React:', !!window.React);
 
