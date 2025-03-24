@@ -5,8 +5,15 @@
   ],
   "routes": [
     {
-      "src": "/embed/widget.js",
-      "dest": "/embed/widget.js",
+      "src": "/embed/widget.txt",
+      "dest": "/embed/widget.txt",
+      "headers": {
+        "Content-Type": "application/javascript"
+      }
+    },
+    {
+      "src": "/embed/widget-loader.js",
+      "dest": "/embed/widget-loader.js",
       "headers": {
         "Content-Type": "application/javascript"
       }
