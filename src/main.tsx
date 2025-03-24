@@ -18,12 +18,16 @@ declare global {
   }
 }
 
-//For standalone use
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+// For standalone use - ONLY when root element exists
+const rootElement = document.getElementById('root');
+if (rootElement) {
+  console.log('Initializing in standalone mode');
+  createRoot(rootElement).render(
+    <StrictMode>
+      <App />
+    </StrictMode>
+  );
+}
 
 // IMPORTANT: Explicitly export to global scope
 export function initWidget(config: { container: Element | string }) {
