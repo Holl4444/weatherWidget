@@ -69,8 +69,21 @@ const exposeGlobalFunction = () => {
         
         if (container) {
           try {
+            // Create a simple div element instead of trying to use App
+            const element = React.createElement('div', {
+              style: {
+                padding: '10px',
+                border: '1px solid #ddd',
+                borderRadius: '5px',
+                fontFamily: 'Arial, sans-serif'
+              }
+            }, [
+              React.createElement('h3', null, 'Weather Widget'),
+              React.createElement('div', null, 'Weather data will appear here')
+            ]);
+            
             const root = ReactDOM.createRoot(container);
-            root.render(React.createElement(${App.name}));
+            root.render(element);
             console.log('Widget initialized successfully');
           } catch (error) {
             console.error('Error initializing widget:', error);
