@@ -5,13 +5,13 @@
   const uniqueId = `weather-widget-${Date.now()}-${Math.floor(
     Math.random() * 1000
   )}`;
-  const container = document.createElement('div');
-  container.id = uniqueId;
-  container.style.border = '1px solid red';
+  container.style.border = '1px solid #ccc';
   container.style.minHeight = '200px';
-  container.style.padding = '10px';
-  container.style.margin = '10px 0';
-  container.style.backgroundColor = '#f0f0f0';
+  container.style.padding = '15px';
+  container.style.margin = '15px 0 0 0';
+  container.style.backgroundColor = '#fff';
+  container.style.borderRadius = '4px';
+  container.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
 
   document.currentScript.insertAdjacentElement('afterend', container);
   const containerElement = container;
