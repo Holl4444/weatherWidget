@@ -4,19 +4,21 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   build: {
-    minify: 'esbuild',
-    terserOptions: {
-      compress: true,
-      mangle: true,
-    },
+    minify: true,
+    sourcemap: true,
     rollupOptions: {
-      input: 'index.html',
       output: {
-        format: 'es',
-        dir: 'dist',
-        entryFileNames: '[name].[hash].js',
-        compact: true,
+        format: 'iife',
+        name: 'WeatherWidget',
+        extend: true,
+        globals: {
+          react: 'React',
+          'react-dom/client': 'ReactDOM', // Update this line
+        },
+        exports: 'named',
+        inlineDynamicImports: true,
       },
+      preserveEntrySignatures: 'exports-only',
     },
   },
 });
