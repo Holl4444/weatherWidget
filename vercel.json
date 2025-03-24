@@ -5,8 +5,8 @@
   ],
   "routes": [
     {
-      "src": "/embed/widget.js",
-      "dest": "/embed/widget.js",
+      "src": "/embed/widget.mjs",
+      "dest": "/embed/widget.mjs",
       "headers": {
         "Content-Type": "application/javascript",
         "Cache-Control": "public, max-age=3600"
