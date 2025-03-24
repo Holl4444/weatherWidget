@@ -42,6 +42,10 @@ export function initWidget(config: { container: Element | string }) {
     try {
       // Store App component globally so it can be used by the global function
       window.WeatherWidgetAppComponent = App;
+      console.log(
+        'Storing App component globally:',
+        !!window.WeatherWidgetAppComponent
+      );
 
       const root = createRoot(container);
       root.render(<App />);
@@ -57,46 +61,24 @@ if (typeof window !== 'undefined') {
     'Explicitly attaching initWeatherWidget to global window'
   );
   window.initWeatherWidget = initWidget;
+   console.log(
+    'WeatherWidgetAppComponent check:',
+    window.WeatherWidgetAppComponent ? 'Available' : 'Not available',
+    typeof window.WeatherWidgetAppComponent
+  );
 }
 
 console.log('About to expose initWeatherWidget globally');
 
-// Modify exposeGlobalFunction to use the globally stored App component
-const exposeGlobalFunction = () => {
-  try {
-    const globalScript = document.createElement('script');
-    globalScript.textContent = `
-      window.initWeatherWidget = function(config) {
-        const container = typeof config.container === 'string'
-          ? document.getElementById(config.container)
-          : config.container;
-        
-        if (container) {
-          try {
-            // Try to use the actual App component if available
-            if (window.WeatherWidgetAppComponent) {
-              const AppComponent = window.WeatherWidgetAppComponent;
-              const element = React.createElement(AppComponent);
-              const root = ReactDOM.createRoot(container);
-              root.render(element);
-              console.log('Real weather widget initialized successfully');
-            } else {
-              // Fallback to placeholder if App component isn't available
-              console.warn('App component not available, using placeholder');
-              // Placeholder code here (your existing code)
-            }
-          } catch (error) {
-            console.error('Error initializing widget:', error);
-          }
-        }
-      };
-      console.log("Real App-capable initWeatherWidget function exposed:", !!window.initWeatherWidget);
-    `;
-    document.head.appendChild(globalScript);
-  } catch (e) {
-    console.error('Failed to expose global function:', e);
-  }
+if (typeof window !== 'undefined') {
+  console.log(
+    'Explicitly attaching initWeatherWidget to global window'
+  );
+  window.initWeatherWidget = initWidget;
+  window.WeatherWidgetAppComponent = App;
+  console.log('Weather widget initialization complete:', {
+    hasInitFunction: typeof window.initWeatherWidget === 'function',
+    hasApp: !!window.WeatherWidgetAppComponent,
+    appType: typeof window.WeatherWidgetAppComponent,
+  });
 };
-
-// Run it immediately
-exposeGlobalFunction();

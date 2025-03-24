@@ -20,13 +20,14 @@
   const containerElement = container;
 
   // First load React and ReactDOM
+  // Specific versions to ensure compatibility
   const reactScript = document.createElement('script');
   reactScript.src =
-    'https://unpkg.com/react@18/umd/react.production.min.js';
+    'https://unpkg.com/react@18.2.0/umd/react.production.min.js';
 
   const reactDomScript = document.createElement('script');
   reactDomScript.src =
-    'https://unpkg.com/react-dom@18/umd/react-dom.production.min.js';
+    'https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js';
 
   // After React is loaded, load our bundle
   reactDomScript.onload = function () {
