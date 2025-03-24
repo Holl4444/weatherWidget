@@ -21,6 +21,7 @@
 
   // Load the main bundle directly - UPDATED BUNDLE NAME
   const script = document.createElement('script');
+  script.type = 'text/javascript';
   script.src =
     'https://weather-widget-pied.vercel.app/assets/index-_BmJhFTO.js';
 

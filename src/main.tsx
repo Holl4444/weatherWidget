@@ -61,12 +61,27 @@ const exposeGlobalFunction = () => {
     // Create a non-module script that will run in global context
     const globalScript = document.createElement('script');
     globalScript.textContent = `
-      window.initWeatherWidget = ${initWidget.toString()};
-      console.log("Global exposure of initWeatherWidget via script:", !!window.initWeatherWidget);
+      // Create a standalone function that doesn't reference outer scope variables
+      window.initWeatherWidget = function(config) {
+        const container = typeof config.container === 'string'
+          ? document.getElementById(config.container)
+          : config.container;
+        
+        if (container) {
+          try {
+            const root = ReactDOM.createRoot(container);
+            root.render(React.createElement(${App.name}));
+            console.log('Widget initialized successfully');
+          } catch (error) {
+            console.error('Error initializing widget:', error);
+          }
+        }
+      };
+      console.log("Self-contained initWeatherWidget function exposed:", !!window.initWeatherWidget);
     `;
     document.head.appendChild(globalScript);
   } catch (e) {
-    console.error("Failed to expose global function:", e);
+    console.error('Failed to expose global function:', e);
   }
 };
 
