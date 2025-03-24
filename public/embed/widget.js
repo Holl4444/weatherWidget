@@ -22,7 +22,7 @@
   // Load the main bundle directly
   const script = document.createElement('script');
   script.src =
-    'https://weather-widget-pied.vercel.app/assets/index-BXephlxF.js';
+    'https://weather-widget-pied.vercel.app/assets/index-DrkgXHZq.js';
 
   script.onload = function () {
       console.log("Bundle loaded, checking for initWeatherWidget:", !!window.initWeatherWidget);
