@@ -42,56 +42,66 @@
     script.src =
       'https://weather-widget-pied.vercel.app/assets/index-BrSWBZU4.js';
 
-    script.onload = function () {
+  script.onload = function () {
+    console.log(
+      'Bundle loaded, checking for initWeatherWidget:',
+      !!window.initWeatherWidget,
+      'WeatherWidgetAppComponent:',
+      !!window.WeatherWidgetAppComponent
+    );
+
+    // Debug what global functions might exist
+    const potentialWidgetFns = Object.keys(window).filter(
+      (k) =>
+        typeof window[k] === 'function' &&
+        (k.includes('widget') || k.includes('Widget'))
+    );
+    console.log('Potential widget functions:', potentialWidgetFns);
+
+    // Check if WeatherWidget has properties
+    if (window.WeatherWidget) {
       console.log(
-        'Bundle loaded, checking for initWeatherWidget:',
-        !!window.initWeatherWidget
+        'Found WeatherWidget global:',
+        window.WeatherWidget
       );
+    }
 
-      // Debug what global functions might exist
-      const potentialWidgetFns = Object.keys(window).filter(
-        (k) =>
-          typeof window[k] === 'function' &&
-          (k.includes('widget') || k.includes('Widget'))
-      );
-      console.log('Potential widget functions:', potentialWidgetFns);
+    // Add more detailed debugging
+    if (window.initWeatherWidget) {
+      try {
+        console.log('About to initialize widget:', {
+          containerExists: !!containerElement,
+          containerId: containerElement.id,
+          containerInDom: !!document.getElementById(
+            containerElement.id
+          ),
+        });
 
-      // Check if WeatherWidget has properties
-      if (window.WeatherWidget) {
-        console.log(
-          'Found WeatherWidget global:',
-          window.WeatherWidget
-        );
-      }
+        window.initWeatherWidget({
+          container: containerElement,
+        });
 
-      if (window.initWeatherWidget) {
+        console.log('Widget initialized, checking container:', {
+          hasChildren: containerElement.children.length > 0,
+          innerHTML: containerElement.innerHTML,
+        });
+      } catch (e) {
+        console.error('Error initializing with direct reference:', e);
+
+        // Try with getElementById as fallback
         try {
-          console.log(
-            'Initializing widget with direct container reference'
-          );
+          console.log('Trying with getElementById fallback');
           window.initWeatherWidget({
-            container: containerElement,
+            container: document.getElementById(uniqueId),
           });
-        } catch (e) {
-          console.error(
-            'Error initializing with direct reference:',
-            e
-          );
-
-          // Try with getElementById as fallback
-          try {
-            console.log('Trying with getElementById fallback');
-            window.initWeatherWidget({
-              container: document.getElementById(uniqueId),
-            });
-          } catch (e2) {
-            console.error('Both initialization methods failed:', e2);
-          }
+        } catch (e2) {
+          console.error('Both initialization methods failed:', e2);
         }
-      } else {
-        console.error('initWeatherWidget not found in global scope!');
       }
-    };
+    } else {
+      console.error('initWeatherWidget not found in global scope!');
+    }
+  };
 
     document.body.appendChild(script);
   };
