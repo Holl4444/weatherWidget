@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.module.css'
 import App from './App.tsx'
+import './index.module.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -13,11 +13,10 @@ createRoot(document.getElementById('root')!).render(
 window.initWeatherWidget = function (config: { container: string }) {
   const container = document.getElementById(config.container);
   if (container) {
-    createRoot(container).render(
-      <StrictMode>
-        <App />
-      </StrictMode>
-    );
+    // Use simpler rendering approach for embedding
+    import('react-dom').then((ReactDOM) => {
+      ReactDOM.render(<App />, container);
+    });
   }
 };
 
