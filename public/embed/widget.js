@@ -6,27 +6,19 @@
   container.id = 'weather-widget-container';
   document.currentScript.insertAdjacentElement('afterend', container);
 
-  // // Load CSS
-  // const link = document.createElement('link');
-  // link.rel = 'stylesheet';
-  // link.href ='https://weather-widget-pied.vercel.app/assets/index-BJpt4Z0r.css';
-  // document.head.appendChild(link);
-
-  // Load JS only with new IIFE build
+  // Load the main bundle directly 
   const script = document.createElement('script');
-  script.src =
-    'https://weather-widget-pied.vercel.app/assets/index-B5QcDblH.js'; 
+  script.src = 'https://weather-widget-pied.vercel.app/assets/index-B5QcDblH.js';
   
   script.onload = function () {
     if (window.initWeatherWidget) {
       window.initWeatherWidget({
-        container: document.getElementById(
-          'weather-widget-container'
-        ),
+        container: document.getElementById('weather-widget-container')
       });
     } else {
       console.error('initWeatherWidget not found!');
     }
   };
+  
   document.body.appendChild(script);
 })();
