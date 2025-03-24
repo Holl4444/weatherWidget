@@ -2,19 +2,9 @@
   console.warn('🌤️ WEATHER WIDGET: Starting...');
 
   // Create container
-  const uniqueId = `weather-widget-${Date.now()}-${Math.floor(
-    Math.random() * 1000
-  )}`;
-  container.style.border = '1px solid #ccc';
-  container.style.minHeight = '200px';
-  container.style.padding = '15px';
-  container.style.margin = '15px 0 0 0';
-  container.style.backgroundColor = '#fff';
-  container.style.borderRadius = '4px';
-  container.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
-
+  const container = document.createElement('div');
+  container.id = `weather-widget-${Date.now()}`;
   document.currentScript.insertAdjacentElement('afterend', container);
-  const containerElement = container;
 
   // Load React and ReactDOM
   const reactScript = document.createElement('script');
@@ -36,7 +26,7 @@
         if (window.initWeatherWidget) {
           const observer = new MutationObserver((mutations) => {
             console.warn('🌤️ Container mutation:', {
-              childNodes: containerElement.childNodes.length,
+              childNodes: container.childNodes.length,
               mutations: mutations.map((m) => ({
                 type: m.type,
                 target: m.target.nodeName,
@@ -44,14 +34,11 @@
             });
           });
 
-          observer.observe(containerElement, {
+          observer.observe(container, {
             childList: true,
             subtree: true,
           });
-          window.initWeatherWidget({
-            container: containerElement,
-            debug: true,
-          });
+          window.initWeatherWidget({ container, debug: true });
         }
       };
 
