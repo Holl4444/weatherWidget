@@ -5,17 +5,11 @@
   ],
   "routes": [
     {
-      "src": "/embed/widget.txt",
-      "dest": "/embed/widget.txt",
-      "headers": {
-        "Content-Type": "application/javascript"
-      }
-    },
-    {
       "src": "/embed/widget-loader.js",
       "dest": "/embed/widget-loader.js",
       "headers": {
-        "Content-Type": "application/javascript"
+        "Content-Type": "application/javascript",
+        "Cache-Control": "no-cache, no-store, must-revalidate"
       }
     },
     { "handle": "filesystem" }
