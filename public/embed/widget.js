@@ -91,6 +91,25 @@
             window.initWeatherWidget({
               container: containerElement,
             });
+            window.initWeatherWidget({
+              container: containerElement,
+            });
+
+            console.warn(
+              '🌤️ WEATHER WIDGET: Post-initialization state:',
+              {
+                containerElement,
+                containerChildren: containerElement.children,
+                containerHTML: containerElement.innerHTML,
+                initFunctionExists:
+                  typeof window.initWeatherWidget === 'function',
+                reactExists: typeof window.React === 'object',
+                reactDOMExists: typeof window.ReactDOM === 'object',
+                weatherWidgetExists:
+                  typeof window.WeatherWidgetAppComponent ===
+                  'function',
+              }
+            );
 
             console.log('Widget initialized, checking container:', {
               hasChildren: containerElement.children.length > 0,
