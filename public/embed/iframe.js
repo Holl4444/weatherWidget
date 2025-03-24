@@ -9,8 +9,8 @@
   const iframe = document.createElement('iframe');
   iframe.src = 'https://weather-widget-pied.vercel.app/';
   iframe.style.border = 'none';
-  iframe.style.width = '300px';
-  iframe.style.height = '150px';
+  iframe.style.width = '350px'; // Increased width
+  iframe.style.height = '200px'; // Increased height
   iframe.style.overflow = 'hidden';
   iframe.title = 'Weather Widget';
 

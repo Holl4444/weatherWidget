@@ -6,23 +6,26 @@
   <body>
     <h1>Weather Widget Demo (iframe)</h1>
 
-    <!-- Use embed.js from local path during development -->
+    <!-- Use the same iframe approach as in iframe.js -->
     <script>
-      // Simple embedding script using iframe
+      // Simple embedding script using iframe with proper DOM methods
       (function() {
         console.log('Iframe embedding script starting');
         
         // Create iframe container
         const container = document.createElement('div');
         
-        // Set iframe HTML - directly loading the root URL
-        container.innerHTML = `
-          <iframe 
-            src="https://weather-widget-pied.vercel.app/embed/iframe.js" 
-            style="border:none; width:300px; height:150px; overflow:hidden;" 
-            title="Weather Widget">
-          </iframe>
-        `;
+        // Create iframe element using DOM methods - directly loading root URL
+        const iframe = document.createElement('iframe');
+        iframe.src = 'https://weather-widget-pied.vercel.app/';
+        iframe.style.border = 'none';
+        iframe.style.width = '350px';  // Increased width
+        iframe.style.height = '200px'; // Increased height
+        iframe.style.overflow = 'hidden';
+        iframe.title = 'Weather Widget';
+        
+        // Append iframe to container
+        container.appendChild(iframe);
         
         // Insert after script tag
         document.currentScript.insertAdjacentElement('afterend', container);
@@ -34,9 +37,8 @@
     <p>Content after the widget...</p>
     
     <h2>Embed Code:</h2>
-<h2>Embed Code:</h2>
-<pre>
+    <pre>
 &lt;script src="https://weather-widget-pied.vercel.app/embed/iframe.js"&gt;&lt;/script&gt;
-</pre>
+    </pre>
   </body>
 </html>
