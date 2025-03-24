@@ -4,8 +4,8 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   build: {
-    minify: false, // Disable minification for better error messages
-    sourcemap: true, // Enable sourcemaps
+    minify: false,
+    sourcemap: true,
     rollupOptions: {
       output: {
         format: 'iife',
@@ -13,13 +13,11 @@ export default defineConfig({
         extend: true,
         globals: {
           react: 'React',
-          'react-dom': 'ReactDOM',
+          'react-dom/client': 'ReactDOM', // Update this line
         },
-        // Add these new options
         exports: 'named',
         inlineDynamicImports: true,
       },
-      // Try to expose initWeatherWidget directly
       preserveEntrySignatures: 'exports-only',
     },
   },

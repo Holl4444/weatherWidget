@@ -23,15 +23,15 @@
   // Use specific versions to ensure compatibility
   const reactScript = document.createElement('script');
   reactScript.src =
-    'https://unpkg.com/react@18.2.0/umd/react.production.min.js';
+    'https://unpkg.com/react@18.3.1/umd/react.production.min.js';
 
-  const reactDomScript = document.createElement('script');
-  reactDomScript.src =
-    'https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js';
+  const reactDomClientScript = document.createElement('script');
+  reactDomClientScript.src =
+    'https://unpkg.com/react-dom@18.3.1/client/umd/react-dom-client.production.min.js';
 
-  // After React is loaded, load our bundle
-  reactDomScript.onload = function () {
-    console.log('React and ReactDOM loaded');
+  // After React and ReactDOM client are loaded, load our bundle
+  reactDomClientScript.onload = function () {
+    console.log('React and ReactDOM client loaded');
 
     // Now load the main bundle
     const script = document.createElement('script');
@@ -95,5 +95,5 @@
 
   // Load React first, then ReactDOM will load
   document.head.appendChild(reactScript);
-  document.head.appendChild(reactDomScript);
+  document.head.appendChild(reactDomClientScript);
 })();
