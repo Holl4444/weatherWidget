@@ -13,6 +13,9 @@ declare global {
   interface Window {
     initWeatherWidget: InitWidgetFunction;
   }
+  interface globalThis {
+    initWeatherWidget: InitWidgetFunction;
+  }
 }
 
 //For standalone use
@@ -41,8 +44,35 @@ export function initWidget(config: { container: Element | string }) {
 
 // Directly attach to window using a more reliable method
 if (typeof window !== 'undefined') {
-  console.log('Explicitly attaching initWeatherWidget to global window');
+  console.log(
+    'Explicitly attaching initWeatherWidget to global window'
+  );
   window.initWeatherWidget = initWidget;
 }
 
-console.log('initWeatherWidget is available:', !!window.initWeatherWidget);
+console.log('About to expose initWeatherWidget globally');
+
+// Force global exposure with multiple approaches
+try {
+  // For globalThis, use a safer approach that TypeScript won't complain about
+  if (typeof globalThis !== 'undefined') {
+    Object.defineProperty(globalThis, 'initWeatherWidget', {
+      value: initWidget,
+      writable: true,
+      configurable: true
+    });
+  }
+  
+  // For window, both direct assignment and defineProperty
+  window.initWeatherWidget = initWidget; // This is fine because we declared it
+  
+  Object.defineProperty(window, 'initWeatherWidget', {
+    value: initWidget,
+    writable: true,
+    configurable: true,
+  });
+  
+  console.log('initWeatherWidget exposed via multiple methods');
+} catch (e) {
+  console.error('Failed to expose initWeatherWidget:', e);
+}

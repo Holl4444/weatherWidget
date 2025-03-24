@@ -4,10 +4,11 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   build: {
+    minify: false, // Disable minification for better error messages
+    sourcemap: true, // Enable sourcemaps
     rollupOptions: {
       output: {
         format: 'iife',
-        // This is critical - expose your function as a global
         name: 'WeatherWidget',
         extend: true,
         globals: {
