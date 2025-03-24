@@ -8,7 +8,7 @@
   const container = document.createElement('div');
   container.id = uniqueId;
 
-  // Add a visible border 
+  // Add a visible border
   container.style.border = '1px solid transparent';
 
   // Insert container into DOM
@@ -25,16 +25,50 @@
     'https://weather-widget-pied.vercel.app/assets/index-DrkgXHZq.js';
 
   script.onload = function () {
-      console.log("Bundle loaded, checking for initWeatherWidget:", !!window.initWeatherWidget);
+    console.log(
+      'Bundle loaded, checking for initWeatherWidget:',
+      !!window.initWeatherWidget
+    );
+
+    // Debug what global functions might exist
+    const potentialWidgetFns = Object.keys(window).filter(
+      (k) =>
+        typeof window[k] === 'function' &&
+        (k.includes('widget') || k.includes('Widget'))
+    );
+    console.log('Potential widget functions:', potentialWidgetFns);
+
+    // Check if WeatherWidget has properties
+    if (window.WeatherWidget) {
+      console.log(
+        'Found WeatherWidget global:',
+        window.WeatherWidget
+      );
+    }
 
     if (window.initWeatherWidget) {
-      console.log('Initializing widget in container:', uniqueId);
-      // Pass the element reference directly
-      window.initWeatherWidget({
-        container: document.getElementById(uniqueId),
-      });
+      try {
+        console.log(
+          'Initializing widget with direct container reference'
+        );
+        window.initWeatherWidget({
+          container: containerElement,
+        });
+      } catch (e) {
+        console.error('Error initializing with direct reference:', e);
+
+        // Try with getElementById as fallback
+        try {
+          console.log('Trying with getElementById fallback');
+          window.initWeatherWidget({
+            container: document.getElementById(uniqueId),
+          });
+        } catch (e2) {
+          console.error('Both initialization methods failed:', e2);
+        }
+      }
     } else {
-      console.error('initWeatherWidget not found!');
+      console.error('initWeatherWidget not found in global scope!');
     }
   };
 

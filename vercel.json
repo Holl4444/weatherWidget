@@ -1,5 +1,5 @@
-  {
-    "version": 2,
+{
+  "version": 2,
   "builds": [
     { "src": "package.json", "use": "@vercel/static-build" }
   ],
@@ -7,6 +7,14 @@
     {
       "src": "/embed/widget.js",
       "dest": "/embed/widget.js",
+      "headers": {
+        "Content-Type": "application/javascript",
+        "Cache-Control": "no-cache, no-store, must-revalidate"
+      }
+    },
+    {
+      "src": "/embed/embed.js",
+      "dest": "/embed/embed.js",
       "headers": {
         "Content-Type": "application/javascript",
         "Cache-Control": "no-cache, no-store, must-revalidate"
