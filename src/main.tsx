@@ -1,6 +1,7 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import ReactDOM from 'react-dom';
+import App from './App.tsx';
 import './index.module.css';
 
 createRoot(document.getElementById('root')!).render(
@@ -10,19 +11,27 @@ createRoot(document.getElementById('root')!).render(
 )
 
 //embeds widget when called by the one liner!
-window.initWeatherWidget = function (config: { container: string }) {
-  const container = document.getElementById(config.container);
+window.initWeatherWidget = function (config: {
+  container: Element | string;
+}) {
+  const container =
+    typeof config.container === 'string'
+      ? document.getElementById(config.container)
+      : config.container;
+  
   if (container) {
-    // Use simpler rendering approach for embedding
-    import('react-dom').then((ReactDOM) => {
-      ReactDOM.render(<App />, container);
-    });
+     try {
+       const root = createRoot(container);
+       root.render(<App />);
+     } catch (error) {
+       console.error(error);
+     }
   }
 };
 
 // TypeScript declaration: Typescript doesn't know about properties added to global objects, like window, unless you declare them. This is after the embed call as it is only used by Typescript at compile time. Hoisted.
 declare global { 
   interface Window {
-    initWeatherWidget: (config: { container: string }) => void;
+    initWeatherWidget: (config: { container: Element | string }) => void;
   }
 }
