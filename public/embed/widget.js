@@ -133,5 +133,4 @@ const reactScript = document.createElement('script');
 
   // Load React first, then ReactDOM will load
   document.head.appendChild(reactScript);
-  document.head.appendChild(reactDomClientScript);
 })();
