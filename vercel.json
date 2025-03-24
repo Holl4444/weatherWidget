@@ -8,8 +8,9 @@
       "src": "/embed/widget.js",
       "dest": "/embed/widget.js",
       "headers": {
-        "Content-Type": "application/javascript",
-        "Cache-Control": "no-cache, no-store, must-revalidate"
+        "Content-Type": "application/javascript; charset=utf-8",
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        "X-Content-Type-Options": "nosniff"
       }
     },
     {
