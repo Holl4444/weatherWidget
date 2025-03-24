@@ -37,3 +37,8 @@ declare global {
     }) => void;
   }
 }
+
+console.log(
+  'initWeatherWidget is available:',
+  !!window.initWeatherWidget
+);
