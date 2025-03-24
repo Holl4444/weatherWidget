@@ -2,12 +2,21 @@
 <html>
   <head>
     <title>Weather Widget Example</title>
+    <!-- Add a bit more debug info -->
+    <script>
+      window.onerror = function(msg, url, line) {
+        console.log('Error: ' + msg + '\nURL: ' + url + '\nLine: ' + line);
+        return false;
+      };
+    </script>
   </head>
   <body>
     <h1>Weather Widget Demo</h1>
 
-    <!-- Change to use widget.js directly -->
-    <script src="https://weather-widget-pied.vercel.app/embed/widget.js"></script>
+    <script 
+      src="https://weather-widget-pied.vercel.app/embed/widget.js"
+      data-debug="true"
+    ></script>
 
     <p>Content after the widget...</p>
   </body>

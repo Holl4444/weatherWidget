@@ -8,8 +8,11 @@
   const container = document.createElement('div');
   container.id = uniqueId;
 
-  // Add a visible border
-  container.style.border = '1px solid transparent';
+  // Add visibility
+  container.style.border = '1px solid red'; // Make border visible
+  container.style.minHeight = '200px'; // Force some height
+  container.style.padding = '10px'; // Add some padding
+  container.style.margin = '10px 0'; // Add some margin
 
   // Insert container into DOM
   document.currentScript.insertAdjacentElement('afterend', container);
