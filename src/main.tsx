@@ -8,3 +8,22 @@ createRoot(document.getElementById('root')!).render(
     <App />
   </StrictMode>,
 )
+
+//embeds widget when called by the one liner!
+window.initWeatherWidget = function (config: { container: string }) {
+  const container = document.getElementById(config.container);
+  if (container) {
+    createRoot(container).render(
+      <StrictMode>
+        <App />
+      </StrictMode>
+    );
+  }
+};
+
+// TypeScript declaration: Typescript doesn't know about properties added to global objects, like window, unless you declare them. This is after the embed call as it is only used by Typescript at compile time. Hoisted.
+declare global { 
+  interface Window {
+    initWeatherWidget: (config: { container: string }) => void;
+  }
+}
