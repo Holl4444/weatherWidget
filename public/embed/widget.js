@@ -49,7 +49,7 @@
       const script = document.createElement('script');
       script.type = 'text/javascript';
       script.src =
-        'https://weather-widget-pied.vercel.app/assets/index-BTg2NuQG.js';
+        'https://weather-widget-pied.vercel.app/assets/index-DKyZjJz-.js';
 
       script.onload = function () {
         console.log('Bundle loaded, checking globals:', {
@@ -91,7 +91,7 @@
             window.initWeatherWidget({
               container: containerElement,
             });
-      
+
             console.warn(
               '🌤️ WEATHER WIDGET: Post-initialization state:',
               {
