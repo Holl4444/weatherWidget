@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "package.json", "use": "@vercel/static-build" }
+  ],
+  "routes": [
+    {
+      "src": "/embed/widget.js",
+      "dest": "/embed/widget.js",
+      "headers": {
+        "Content-Type": "application/javascript",
+        "Cache-Control": "public, max-age=3600"
+      }
+    },
+    { "handle": "filesystem" }
+  ]
+}
