@@ -33,52 +33,46 @@ if (rootElement) {
 
 // IMPORTANT: Explicitly export to global scope
 export function initWidget(config: { container: Element | string }) {
+  console.warn('🌤️ initWidget called with:', config);
+
   const container =
     typeof config.container === 'string'
       ? document.getElementById(config.container)
       : config.container;
 
+  console.warn('🌤️ Container resolved:', {
+    exists: !!container,
+    type: typeof container,
+    id: container?.id,
+  });
+
   if (container) {
     try {
-      // Store App component globally so it can be used by the global function
       window.WeatherWidgetAppComponent = App;
-      console.log(
-        'Storing App component globally:',
-        !!window.WeatherWidgetAppComponent
-      );
+      console.warn('🌤️ Root creation starting for:', container.id);
 
       const root = createRoot(container);
+      console.warn('🌤️ Root created, rendering App');
+
       root.render(<App />);
+      console.warn('🌤️ Render called on root');
     } catch (error) {
-      console.error(error);
+      console.error('🌤️ Widget initialization failed:', error);
     }
   }
 }
 
 // Directly attach to window using a more reliable method
 if (typeof window !== 'undefined') {
-  console.log(
-    'Explicitly attaching initWeatherWidget to global window'
-  );
-  window.initWeatherWidget = initWidget;
-   console.log(
-    'WeatherWidgetAppComponent check:',
-    window.WeatherWidgetAppComponent ? 'Available' : 'Not available',
-    typeof window.WeatherWidgetAppComponent
-  );
-}
+  console.log('Initialising weather widget globally');
 
-console.log('About to expose initWeatherWidget globally');
-
-if (typeof window !== 'undefined') {
-  console.log(
-    'Explicitly attaching initWeatherWidget to global window'
-  );
-  window.initWeatherWidget = initWidget;
+  // Set up the widget components  
   window.WeatherWidgetAppComponent = App;
+  window.initWeatherWidget = initWidget;
+
   console.log('Weather widget initialization complete:', {
     hasInitFunction: typeof window.initWeatherWidget === 'function',
     hasApp: !!window.WeatherWidgetAppComponent,
     appType: typeof window.WeatherWidgetAppComponent,
   });
-};
+}
