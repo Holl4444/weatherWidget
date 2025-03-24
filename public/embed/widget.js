@@ -16,7 +16,7 @@
   // Load JS 
   const script = document.createElement('script');
   script.src =
-    'https://weather-widget-pied.vercel.app/assets/index-BzTu4Ygy.js'; 
+    'https://weather-widget-pied.vercel.app/assets/index-BQB9t8up.js'; 
   script.onload = function () {
  
     window.initWeatherWidget && 
