@@ -29,7 +29,7 @@
   // Use specific versions to ensure compatibility
   const reactScript = document.createElement('script');
   reactScript.src =
-    'https://unpkg.com/react@18.3.1/umd/react.production.min.js';
+    'https://unpkg.com/react@18.3.1/umd/react.development.js';
 
   reactScript.onload = function () {
     console.log('✓ React core loaded, window.React:', !!window.React);
@@ -37,7 +37,7 @@
     // Only load ReactDOM after React loads successfully
     const reactDomClientScript = document.createElement('script');
     reactDomClientScript.src =
-      'https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js';
+      'https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js';
 
     reactDomClientScript.onload = function () {
       console.log(
@@ -80,16 +80,26 @@
         // Add more detailed debugging
         if (window.initWeatherWidget) {
           try {
-            console.log('About to initialize widget:', {
-              containerExists: !!containerElement,
-              containerId: containerElement.id,
-              containerInDom: !!document.getElementById(
-                containerElement.id
-              ),
-            });
+            console.warn('🌤️ React version:', React.version);
 
             window.initWeatherWidget({
               container: containerElement,
+              debug: true,
+            });
+
+            const observer = new MutationObserver((mutations) => {
+              console.warn('🌤️ Container mutation:', {
+                childNodes: containerElement.childNodes.length,
+                mutations: mutations.map((m) => ({
+                  type: m.type,
+                  target: m.target.nodeName,
+                })),
+              });
+            });
+
+            observer.observe(containerElement, {
+              childList: true,
+              subtree: true,
             });
 
             console.warn(
