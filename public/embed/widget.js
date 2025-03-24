@@ -91,10 +91,7 @@
             window.initWeatherWidget({
               container: containerElement,
             });
-            window.initWeatherWidget({
-              container: containerElement,
-            });
-
+      
             console.warn(
               '🌤️ WEATHER WIDGET: Post-initialization state:',
               {
