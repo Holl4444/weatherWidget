@@ -5,11 +5,10 @@
   ],
   "routes": [
     {
-      "src": "/embed/widget.mjs",
-      "dest": "/embed/widget.mjs",
+      "src": "/embed/widget.js",
+      "dest": "/embed/widget.js",
       "headers": {
-        "Content-Type": "application/javascript",
-        "Cache-Control": "public, max-age=3600"
+        "Content-Type": "application/javascript"
       }
     },
     { "handle": "filesystem" }
