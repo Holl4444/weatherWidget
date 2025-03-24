@@ -12,9 +12,11 @@ interface InitWidgetFunction {
 declare global {
   interface Window {
     initWeatherWidget: InitWidgetFunction;
+    WeatherWidgetAppComponent: React.ComponentType<object>;
   }
   interface globalThis {
     initWeatherWidget: InitWidgetFunction;
+    WeatherWidgetAppComponent: React.ComponentType<object>;
   }
 }
 
@@ -38,6 +40,9 @@ export function initWidget(config: { container: Element | string }) {
 
   if (container) {
     try {
+      // Store App component globally so it can be used by the global function
+      window.WeatherWidgetAppComponent = App;
+
       const root = createRoot(container);
       root.render(<App />);
     } catch (error) {
@@ -56,12 +61,11 @@ if (typeof window !== 'undefined') {
 
 console.log('About to expose initWeatherWidget globally');
 
+// Modify exposeGlobalFunction to use the globally stored App component
 const exposeGlobalFunction = () => {
   try {
-    // Create a non-module script that will run in global context
     const globalScript = document.createElement('script');
     globalScript.textContent = `
-      // Create a standalone function that doesn't reference outer scope variables
       window.initWeatherWidget = function(config) {
         const container = typeof config.container === 'string'
           ? document.getElementById(config.container)
@@ -69,28 +73,24 @@ const exposeGlobalFunction = () => {
         
         if (container) {
           try {
-            // Create a simple div element instead of trying to use App
-            const element = React.createElement('div', {
-              style: {
-                padding: '10px',
-                border: '1px solid #ddd',
-                borderRadius: '5px',
-                fontFamily: 'Arial, sans-serif'
-              }
-            }, [
-              React.createElement('h3', null, 'Weather Widget'),
-              React.createElement('div', null, 'Weather data will appear here')
-            ]);
-            
-            const root = ReactDOM.createRoot(container);
-            root.render(element);
-            console.log('Widget initialized successfully');
+            // Try to use the actual App component if available
+            if (window.WeatherWidgetAppComponent) {
+              const AppComponent = window.WeatherWidgetAppComponent;
+              const element = React.createElement(AppComponent);
+              const root = ReactDOM.createRoot(container);
+              root.render(element);
+              console.log('Real weather widget initialized successfully');
+            } else {
+              // Fallback to placeholder if App component isn't available
+              console.warn('App component not available, using placeholder');
+              // Placeholder code here (your existing code)
+            }
           } catch (error) {
             console.error('Error initializing widget:', error);
           }
         }
       };
-      console.log("Self-contained initWeatherWidget function exposed:", !!window.initWeatherWidget);
+      console.log("Real App-capable initWeatherWidget function exposed:", !!window.initWeatherWidget);
     `;
     document.head.appendChild(globalScript);
   } catch (e) {
