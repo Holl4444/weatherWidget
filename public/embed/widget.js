@@ -20,7 +20,7 @@
   const containerElement = container;
 
   // First load React and ReactDOM
-  // Specific versions to ensure compatibility
+  // Use specific versions to ensure compatibility
   const reactScript = document.createElement('script');
   reactScript.src =
     'https://unpkg.com/react@18.2.0/umd/react.production.min.js';
@@ -37,7 +37,7 @@
     const script = document.createElement('script');
     script.type = 'text/javascript';
     script.src =
-      'https://weather-widget-pied.vercel.app/assets/index-CmJA9Rrz.js';
+      'https://weather-widget-pied.vercel.app/assets/index-DQXr_wvs.js';
 
     script.onload = function () {
       console.log(
