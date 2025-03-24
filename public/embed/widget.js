@@ -22,32 +22,16 @@
   // Load the main bundle directly
   const script = document.createElement('script');
   script.src =
-    'https://weather-widget-pied.vercel.app/assets/index-B5QcDblH.js';
+    'https://weather-widget-pied.vercel.app/assets/index-BXephlxF.js';
 
   script.onload = function () {
-    console.log(
-      'Bundle loaded, checking container exists:',
-      !!document.getElementById(uniqueId)
-    );
-
-    // Verify container still exists
-    if (!document.getElementById(uniqueId)) {
-      console.error('Container element was removed from DOM!');
-      // Re-insert if needed
-      document.currentScript.insertAdjacentElement(
-        'afterend',
-        containerElement
-      );
-    }
+      console.log("Bundle loaded, checking for initWeatherWidget:", !!window.initWeatherWidget);
 
     if (window.initWeatherWidget) {
-      console.log(
-        'Initializing widget in container element directly'
-      );
-
-      // Pass the element reference directly, not the ID
+      console.log('Initializing widget in container:', uniqueId);
+      // Pass the element reference directly
       window.initWeatherWidget({
-        container: containerElement,
+        container: document.getElementById(uniqueId),
       });
     } else {
       console.error('initWeatherWidget not found!');
