@@ -1,7 +1,6 @@
 .current {
     display: flex;
-    flex: 3;
-}
+  }
 
 .currentTimeText {
     margin-bottom: 0.3rem;
