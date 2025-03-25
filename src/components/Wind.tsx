@@ -8,19 +8,15 @@ export default function Wind() {
   const arrowSrc = `https://cdn-icons-png.flaticon.com/128/5174/5174032.png`;
   const rotation = (weatherData.list[0].wind.deg + 180) % 360;
   const arrowAlt = compass(rotation);
-
-  const arrowStyle = {
-    transform: `rotate(${rotation}deg)`,
-    width: '1.2rem',
-    height: '1.2rem',
-  };
-
   return (
     <div className={styles.wind}>
       <img
         src={arrowSrc}
         alt={`An arrow showing the wind direction: currently ${arrowAlt}`}
-        style={arrowStyle}
+        className={styles.windArrow}
+        style={
+          { '--rotation': `${rotation}deg` } as React.CSSProperties //trust me TS it's valid css
+        }
       ></img>
       <p className={styles.windSpeedText}>{`${windSpeed}m/s`}</p>
     </div>

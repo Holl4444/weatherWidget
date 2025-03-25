@@ -1,8 +1,10 @@
 .current {
     display: flex;
     justify-content: space-evenly;
+    align-self: flex-end;
     width: 100%;
     margin-left: 1rem;
+    gap: 0.2rem;
   }
 
 .currentTimeText {
@@ -17,19 +19,21 @@
     height: 7rem;
     width: 7rem;
     margin: 0.5rem 0 0 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 .nowIcon {
     background-color: #e9e7e7;
     width: 100%;
-    height: 86%;
+    height: auto;
     box-shadow: 0 1px 2px 1px #c7c4c4;
     aspect-ratio: 1;
 }
 
 .currentWeatherText {
-    padding-bottom: 0rem;
-    font-size: min(0.9rem, 100%);
+    font-size: min(0.7rem, 80%);
     white-space: nowrap;
 }
 
@@ -37,15 +41,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: auto 0.5rem 0.5rem;
     justify-content: space-evenly;
     width: 100%;
+    margin-top: auto;
 }
 
 .updatesToday {
     display: flex;
     justify-content: space-evenly;
-    width: 100%
+    align-items: flex-end;
+    width: 100%;
+    gap: 0.1rem;
 }
 
 .tempWindContainer {

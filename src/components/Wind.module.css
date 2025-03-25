@@ -9,3 +9,9 @@
     font-size: min(0.7rem, 100%);
     white-space: nowrap;
 }
+
+.windArrow {
+    width: 1.1rem;
+    height: 1.1rem;
+    transform: rotate(var(--rotation));
+}
