@@ -1,9 +1,7 @@
 (function () {
-  // Create container with flex layout
+  // Create container
   const container = document.createElement('div');
   container.id = `weather-widget-${Date.now()}`;
-
-  // Use flex layout with complete centering
 
   container.setAttribute(
     'style',
@@ -24,26 +22,42 @@
       'https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js';
 
     reactDomScript.onload = function () {
-      const bundleScript = document.createElement('script');
-      bundleScript.type = 'text/javascript';
-      bundleScript.src =
-        'https://weather-widget-pied.vercel.app/assets/index-Dq5C0tll.js';
+      // Fetch the manifest as part of automating src to update
+      const manifestRequest = new XMLHttpRequest();
+      manifestRequest.open(
+        'GET',
+        'https://weather-widget-pied.vercel.app/manifest.json',
+        true
+      );
 
-      bundleScript.onload = function () {
-        if (window.initWeatherWidget) {
-          // Single mutation observer for development
-          if (bundleScript.src.includes('development')) {
-            const observer = new MutationObserver(() => {});
-            observer.observe(container, {
-              childList: true,
-              subtree: true,
-            });
-          }
-          window.initWeatherWidget({ container });
+      // Automate updating the script src
+      manifestRequest.onload = function () {
+        if (manifestRequest.status === 200) {
+          const manifest = JSON.parse(manifestRequest.responseText);
+          const bundleScript = document.createElement('script');
+          bundleScript.type = 'text/javascript';
+          bundleScript.src =
+            'https://weather-widget-pied.vercel.app/' +
+            manifest['index.html'].file;
+
+          bundleScript.onload = function () {
+            if (window.initWeatherWidget) {
+              // Single mutation observer for development
+              if (bundleScript.src.includes('development')) {
+                const observer = new MutationObserver(() => {});
+                observer.observe(container, {
+                  childList: true,
+                  subtree: true,
+                });
+              }
+              window.initWeatherWidget({ container });
+            }
+          };
+
+          document.body.appendChild(bundleScript);
         }
       };
-
-      document.body.appendChild(bundleScript);
+      manifestRequest.send();
     };
 
     document.head.appendChild(reactDomScript);

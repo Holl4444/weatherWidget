@@ -5,6 +5,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     minify: true,
+    manifest: true,
     sourcemap: true,
     rollupOptions: {
       output: {
