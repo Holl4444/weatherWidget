@@ -8,8 +8,45 @@ A lightweight, embeddable weather widget built with React.
 - Fallback to The Pineapple 🍍 if location not found
 - Secure headers and content delivery
 - Proper React/ReactDOM loading management
+- Compass feature to provide alt text to wind direction
 
 ## Implementation Journey
+
+### 1. Initial Research & Planning
+- Analyzed API data (40 time slots, 3-hour intervals)
+- Researched weather data points (temp_kf vs temp)
+- Discovered built-in icon system
+- Created initial wireframes and designs
+
+### 2. Development Evolution
+1. **Vanilla JavaScript Prototype**
+   - Pure DOM manipulation approach
+   - Simple but limiting for complex UI
+   - Learned valuable lessons about script injection
+
+2. **React Implementation**
+   - Moved to React for better component structure
+   - Explored webpack configurations
+   - Settled on Vite for smoother bundling
+
+3. **Explored IFrame Approach**
+   - Attempted for isolation
+   - Added unnecessary complexity
+   - Abandoned for cleaner script injection
+
+4. **Final Implementation**
+   - Direct script embedding
+   - Clean location detection
+   - Proper React/ReactDOM loading
+   - The Pineapple 🍍 fallback solution
+
+### Development Screenshots
+![rough-design](rough-design.png)
+![Wireframe/Design](wireframeWeather.png)
+![Vanilla JS Version](./docs/images/vanilla.png)
+![vanilla-file-to-see](image-2.png)
+![early version](image-3.png)
+
 
 ### Current Implementation
 The widget uses direct script embedding with managed dependencies:
@@ -28,39 +65,13 @@ Fallback Location:
 - The Pineapple, Dunmore (56.0729, -3.8326)
 - A folly built in 1761 near Airth, Scotland
 
-### Development History
-
-#### 1. Vanilla JavaScript Approach
-First attempt using pure DOM manipulation:
-```javascript
-document.createElement('div')
-// Direct DOM manipulation was fun but limiting
-```
-**Lessons**: While straightforward, lacked component reusability and state management and George said I'd be working with React!
-
-#### 2. Global Script Injection
-Attempted dynamic React component loading:
-```javascript
-window.WeatherWidgetAppComponent = App;
-```
-**Challenges**: Script context isolation and component serialization issues
-
-#### 3. IFrame Implementation
-Explored for better isolation:
-```html
-<iframe src="weather-widget.html"></iframe>
-```
-**Outcome**: Added complexity without significant benefits and just INCREDIBLY ugly.
 
 ## Technical Details
-- Types from [openweathermap-ts](https://www.npmjs.com/package/openweathermap-ts)
 - React 18.3.1
-- Security:
-  - `X-Content-Type-Options: nosniff`
-  - `Cache-Control: no-cache`
-  - Content-Type enforcement
+- Types from [openweathermap-ts](https://www.npmjs.com/package/openweathermap-ts)
+- Security headers and content type enforcement
 
-## Usage
+## Usage & Development
 Add to any HTML page:
 ```html
 <script src="https://weather-widget-pied.vercel.app/embed/widget.js"></script>
