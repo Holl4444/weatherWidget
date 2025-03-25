@@ -5,7 +5,7 @@ A lightweight, embeddable weather widget built with React.
 ## Features
 - Dynamic location detection from NT property Google Maps links
 - Weather forecasts for each property
-- Fallback to The Pineapple 🍍 if location not found
+- Fallback to Castle Drogo if location not found
 - Secure headers and content delivery
 - Proper React/ReactDOM loading management
 - Compass feature to provide alt text to wind direction
@@ -38,7 +38,7 @@ A lightweight, embeddable weather widget built with React.
    - Direct script embedding
    - Clean location detection
    - Proper React/ReactDOM loading
-   - The Pineapple 🍍 fallback solution
+   - Castle Drogo fallback location
 
 ### Development Screenshots
 ![rough-design](rough-design.png)

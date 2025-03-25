@@ -34,11 +34,12 @@ const App = ({ coords }: coordProps) => {
   // Fetch weather info as though from a real API:
   useEffect(() => {
     const apiCall = async () => {
-      const lat = coords?.lat ?? 56.0729; //Fallback coords to National Trust Pineapple
-      const lon = coords?.lon ?? -3.8326; //Scotland's finest fruit-shaped building
+      // Fallback coords to Castle Drogo - England's newest castle (1930)!
+      const lat = coords?.lat ?? 50.6816;
+      const lon = coords?.lon ?? -3.7844; 
       console.log('API call using coordinates:', { lat, lon });
       // Required parameters according to openweatherMap we have (lat, lon, appid). No specific headers.
-      const url = `https://europe-west1-amigo-actions.cloudfunctions.net/recruitment-mock-weather-endpoint/forecast?appid=a2ef86c41a&lat=${lat}&lon=${lon}`;;
+      const url = `https://europe-west1-amigo-actions.cloudfunctions.net/recruitment-mock-weather-endpoint/forecast?appid=a2ef86c41a&lat=${lat}&lon=${lon}`;
       try {
         const response = await fetch(url);
         // Handle errors like 404 not found
