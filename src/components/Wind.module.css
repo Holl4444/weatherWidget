@@ -6,5 +6,6 @@
 }
 
 .windSpeedText {
-    font-size: 0.7rem;
+    font-size: min(0.7rem, 100%);
+    white-space: nowrap;
 }

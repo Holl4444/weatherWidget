@@ -20,23 +20,17 @@ export default function WeekAhead() {
   const currentTime: number = parseInt(
     weatherData.list[0].dt_txt.slice(11, -3)
   );
-  let len = currentTime >= 18 ? 5 : 4; // 18:00 so we have full day info for 6th date day
+  const len = currentTime >= 18 ? 5 : 4; // 18:00 so we have full day info for 6th date day
   // Find number of updates left in day: (24hours - current time in hours) is hours left in day. Divide by 3 and round down gives number of weatherData.list indexes left in this day -1 for current.
   const daysRemainingUpdates = Math.floor((24 - currentTime) / 3);
   // this index + 1 = midnight of next day. Another 3 to get to 9am as we dont want to include weather when site shut = 4. Dispose of those -1 + 1 and it's back to startIndex + 3 so dayTracker = 3
-  let dayTracker = 3;
+  const dayTracker = 3;
   // We'll need to access the same start time for the following 4 so add 8
 
   let startIndex = daysRemainingUpdates + dayTracker;
   let endDayIndex = startIndex + 4;
   const iconArrayContainer: WeatherItem[][] = []; // an array of string arrays :)
-
-  `${weatherData.list[0].weather[0].description
-    .slice(0, 1)
-    .toUpperCase()}${weatherData.list[0].weather[0].description.slice(
-    1
-  )}`;
-  // Fill iconArrayContainer with arrays of the all daytime icons from the next few days.
+  // Fill iconArrayContainer with arrays of the all daytime icons from the next few days and descriptions for alt text.
   for (let i = 0; i < len; i++) {
     const weatherItems: WeatherItem[] = [];
     for (
@@ -44,21 +38,18 @@ export default function WeekAhead() {
       j < endDayIndex && j < weatherData.list.length;
       j++
     ) {
-      const description = `${weatherData.list[
-        j
-      ].weather[0].description
+      const description = `${weatherData.list[j].weather[0].description
         .slice(0, 1)
-        .toUpperCase()}${weatherData.list[0].weather[0].description.slice(
+        .toUpperCase()}${weatherData.list[j].weather[0].description.slice(
         1
       )}`;
       const date = `${weatherData.list[j].dt_txt.slice(0, 10)}`;
-      weatherData.list.slice(startIndex, endDayIndex).map((item) => {
-        weatherItems.push({
-          icon: item.weather[0].icon,
+
+      weatherItems.push({
+          icon: weatherData.list[j].weather[0].icon,
           description: description,
           date: date,
         });
-      });
     }
     iconArrayContainer.push(weatherItems);
     startIndex += 8;
@@ -66,7 +57,7 @@ export default function WeekAhead() {
   }
 
   const weekAheadIcons: WeatherItem[] = [];
-  for (let array of iconArrayContainer) {
+  for (const array of iconArrayContainer) {
     const averageIcon = getDayIcon(array);
     if (!averageIcon) {
       return null;
@@ -84,7 +75,7 @@ export default function WeekAhead() {
         const dayDate: string = `${id.slice(-2)}`;
         return (
           <div key={id} className={styles.weekDays}>
-            <p>{dayDate}</p>
+            <p className={styles.weekDateText}>{dayDate}</p>
             <Icon
               id={id}
               icon={icon}
