@@ -3,5 +3,5 @@
     width: 100%;
     display: flex;
     gap: 0.3rem;
-    justify-content: space-between;
+    justify-content: space-around;
 }
