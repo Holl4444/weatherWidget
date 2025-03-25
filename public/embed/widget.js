@@ -5,11 +5,14 @@
   const container = document.createElement('div');
   container.id = `weather-widget-${Date.now()}`;
 
-  // Add subtle card styling
+  // Add subtle card styling with min-width to prevent squishing
   container.style.backgroundColor = '#ffffff';
-  container.style.padding = '12px';
-  container.style.margin = '12px 0';
+  container.style.padding = '16px';
+  container.style.margin = '16px 0';
   container.style.maxWidth = '400px';
+  container.style.minWidth = '280px'; // Prevent content squishing
+  container.style.width = '100%'; // Allow responsive sizing
+  container.style.boxSizing = 'border-box'; // Include padding in width
   container.style.boxShadow = '0 1px 3px rgba(0,0,0,0.08)';
   container.style.borderRadius = '4px';
 
