@@ -10,7 +10,6 @@
     'display: flex; justify-content: center; align-items: center; background-color: #fff; padding: 1em; margin: 1em 0; width: 100%; min-width: 0; box-sizing: border-box; box-shadow: 0 0.0625rem 0.1875rem #00000014; border-radius: 0.25rem'
   );
 
-
   // Add container right after script
   document.currentScript.insertAdjacentElement('afterend', container);
 
@@ -28,7 +27,7 @@
       const bundleScript = document.createElement('script');
       bundleScript.type = 'text/javascript';
       bundleScript.src =
-        'https://weather-widget-pied.vercel.app/assets/index-d5XDoemP.js';
+        'https://weather-widget-pied.vercel.app/assets/index-DBxfHYrt.js';
 
       bundleScript.onload = function () {
         if (window.initWeatherWidget) {
