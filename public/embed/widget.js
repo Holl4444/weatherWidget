@@ -7,7 +7,7 @@
 
   container.setAttribute(
     'style',
-    'display: flex; justify-content: center; align-items: center; background-color: #fff; padding: 1em; margin: 1em auto; width: 100%; min-width: 0; box-sizing: border-box; box-shadow: 0 0.0625rem 0.1875rem #00000014; border-radius: 0.25rem'
+    'display: flex; justify-content: center; align-items: center; background-color: #fff; padding: 1em; width: 100%; min-width: 0; font-size: 16px; box-sizing: border-box; box-shadow: 0 0.0625rem 0.1875rem #00000014; border-radius: 0.25rem'
   );
 
   // Add container right after script
