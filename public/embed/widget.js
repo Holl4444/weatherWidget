@@ -4,15 +4,11 @@
   container.id = `weather-widget-${Date.now()}`;
 
   // Use flex layout with complete centering
-  container.style.display = 'flex';
-  container.style.justifyContent = 'center';
-  container.style.alignItems = 'center'; 
-  container.style.backgroundColor = '#fff';
-  container.style.padding = '1rem';
-  container.style.margin = '1rem 0';
-  container.style.width = 'fit-content';
-  container.style.boxShadow = '0 0.0625rem 0.1875rem #00000014';
-  container.style.borderRadius = '0.25rem';
+
+  container.setAttribute(
+    'style',
+    'display: flex; justifyContent: center; alignItems: center; backgroundColor: #fff; padding: 1rem; margin: 1rem 0; width: fit-content; boxshadow: 0 0.0625rem 0.1875rem #00000014; borderRadius: 0.25rem'
+  );
 
   document.currentScript.insertAdjacentElement('afterend', container);
 
