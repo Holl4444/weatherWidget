@@ -1,7 +1,8 @@
 .weekDaysContainer {
     display: flex;
-    align-items: end;
-    column-gap: 0.5rem;
+    align-self: flex-end; 
+    align-items: flex-end;
+    justify-content: space-evenly;
     margin-left: 0.5rem;
 }
 
