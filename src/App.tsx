@@ -32,13 +32,14 @@ const App = ({ coords }: coordProps) => {
   const [weatherData, setWeatherData] = useState<ThreeHourResponse>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [hoverCount, setHoverCount] = useState(0) // Track session hovers
+
   // Fetch weather info as though from a real API:
   useEffect(() => {
-
     const apiCall = async () => {
       // Fallback coords to Castle Drogo - England's newest castle (1930)!
       const lat = coords?.lat ?? 50.6816;
-      const lon = coords?.lon ?? -3.7844; 
+      const lon = coords?.lon ?? -3.7844;
       console.log('API call using coordinates:', { lat, lon });
       // Required parameters according to openweatherMap we have (lat, lon, appid). No specific headers.
       const url = `https://europe-west1-amigo-actions.cloudfunctions.net/recruitment-mock-weather-endpoint/forecast?appid=a2ef86c41a&lat=${lat}&lon=${lon}`;
@@ -67,6 +68,30 @@ const App = ({ coords }: coordProps) => {
     console.log('App received coords:', coords);
     apiCall();
   }, [coords]);
+
+  useEffect(() => {
+    // Add listener when component mounts
+    const accordion = document.querySelector('.glFdsV');
+    const handleClick = (event: Event) => {
+      const accordionItem = (event.target as Element).closest('li');
+      if (accordionItem) {
+        const locationName =
+          window.location.pathname.split('/').pop() ||
+          'unknown-location';
+        track('accordion_click', {
+          propertyId: locationName,
+          section: accordionItem.id.replace('place-', ''),
+          timestamp: new Date().toISOString(),
+        });
+      }
+    };
+
+    accordion?.addEventListener('click', handleClick);
+
+    // Clean up when component unmounts
+    return () => accordion?.removeEventListener('click', handleClick);
+  }, []); // Empty array means run once on mount
+
   // Wrap everything we need elsewhere in context provider. Everything in here will be able to access useWeather hook and therefore weatherData and error
   return (
     <WeatherContext.Provider value={{ weatherData, error }}>
@@ -78,15 +103,20 @@ const App = ({ coords }: coordProps) => {
         <div>No weatherData available</div>
       ) : (
         <>
-                <div className={styles.weatherContainer}
-                  onMouseEnter={() => { // track hover for vercel analytics
-                    const locationName = window.location.pathname.split('/').pop() || 'unknown-location';
-                    track('widget-hover', {
-                      propertyId: locationName,
-                      timestamp: new Date().toISOString()
-                    });
-                  }}
-            >
+          <div
+            className={styles.weatherContainer}
+            onMouseEnter={() => {
+              setHoverCount((prev) => {
+                track('widget-hover', {
+                  propertyId: window.location.pathname.split('/').pop() //browser window -> current url info -> url path
+                    || 'unknown-location',
+                  timestamp: new Date().toISOString(),
+                  hoverCount: prev + 1,
+                });
+                return prev + 1; //updating hoverCount
+              });
+            }}
+          >
             <Current />
             <WeekAhead />
           </div>
