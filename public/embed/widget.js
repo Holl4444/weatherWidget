@@ -7,7 +7,7 @@
 
   container.setAttribute(
     'style',
-    'display: flex; justify-content: center; align-items: center; background-color: #fff; padding: 1rem; margin-top: 0 auto; width: 90%; box-shadow: 0 0.0625rem 0.1875rem #00000014; border-radius: 0.25rem'
+    'display: flex; justify-content: center; align-items: center; background-color: #fff; padding: 1rem; margin-top: 0 auto; width: 80%; box-shadow: 0 0.0625rem 0.1875rem #00000014; border-radius: 0.25rem'
   );
 
   // Add container right after script
@@ -31,7 +31,10 @@
 
       bundleScript.onload = function () {
         if (window.initWeatherWidget) {
-          // Single mutation observer for development
+          // get coords
+          const coords = getSiteLocation();
+
+          // Development observer setup
           if (bundleScript.src.includes('development')) {
             const observer = new MutationObserver(() => {});
             observer.observe(container, {
@@ -39,7 +42,9 @@
               subtree: true,
             });
           }
-          window.initWeatherWidget({ container });
+          console.log('Initializing widget with coords:', coords);
+          // Pass coordinates to widget initialization
+          window.initWeatherWidget({ container, coords });
         }
       };
 
@@ -51,3 +56,22 @@
 
   document.head.appendChild(reactScript);
 })();
+
+
+function getSiteLocation() {
+  const mapLink = document.querySelector('a[href*="maps/dir"]');
+  console.log('No map link');
+  if (!mapLink) return null;
+
+  const match = mapLink.href.match(
+    /destination=([-\d.]+)%2C([-\d.]+)/
+  );
+  if (match) {
+    const coords = {
+      lat: Number(match[1]),
+      lon: Number(match[2]),
+    };
+    return coords;
+  }
+  return null;
+}

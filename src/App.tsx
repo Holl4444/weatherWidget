@@ -9,6 +9,13 @@ interface WeatherContextType {
   error: string | null;
 }
 
+interface coordProps {
+  coords?: {
+    lat: number;
+    lon: number;
+  };
+}
+
 const WeatherContext = createContext<WeatherContextType | undefined>(undefined); // Creates context for the hook useWeather - undefined is the default value - this is where the .Provider container component comes from
 
 // export the hook to be used in other components
@@ -20,15 +27,18 @@ export function useWeather() {
   return context;
 }
 
-const App = () => {
+const App = ({ coords }: coordProps) => {
   const [weatherData, setWeatherData] = useState<ThreeHourResponse>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   // Fetch weather info as though from a real API:
   useEffect(() => {
     const apiCall = async () => {
+      const lat = coords?.lat ?? 27.98785;
+      const lon = coords?.lon ?? 86.925026;
+      console.log('API call using coordinates:', { lat, lon });
       // Required parameters according to openweatherMap we have (lat, lon, appid). No specific headers.
-      const url = `https://europe-west1-amigo-actions.cloudfunctions.net/recruitment-mock-weather-endpoint/forecast?appid=a2ef86c41a&lat=27.987850&lon=86.925026`;
+      const url = `https://europe-west1-amigo-actions.cloudfunctions.net/recruitment-mock-weather-endpoint/forecast?appid=a2ef86c41a&lat=${lat}&lon=${lon}`;;
       try {
         const response = await fetch(url);
         // Handle errors like 404 not found
@@ -51,8 +61,9 @@ const App = () => {
         setLoading(false);
       }
     };
+    console.log('App received coords:', coords);
     apiCall();
-  }, []);
+  }, [coords]);
   // Wrap everything we need elsewhere in context provider. Everything in here will be able to access useWeather hook and therefore weatherData and error
   return (
     <WeatherContext.Provider value={{ weatherData, error }}>
@@ -70,6 +81,6 @@ const App = () => {
       )}
     </WeatherContext.Provider>
   );
-}
+};
 
 export default App;
