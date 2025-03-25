@@ -1,4 +1,4 @@
-# Weather Widget
+# Weather Widget 🍍
 
 A lightweight, embeddable weather widget built with React.
 
