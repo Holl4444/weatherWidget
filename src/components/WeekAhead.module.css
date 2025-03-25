@@ -3,6 +3,7 @@
     align-items: end;
     column-gap: 0.5rem;
     margin-left: 0.5rem;
+    flex: 1;
 }
 
 .weekDays {
