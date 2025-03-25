@@ -1,6 +1,7 @@
 .current {
   display: flex;
   justify-content: center;
+  align-items: flex-end;
   gap: 0.2em;
 }
 
@@ -9,34 +10,36 @@
   white-space: nowrap; /* Prevent text wrapping */
   font-size: 1em;
   transform: translateY(-0.3em);
+  justify-self: center;
 }
 
 .todayContainer {
-  height: 7em;
-  width: 7em;
+  height: 8em;
+  width: 8em;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   align-items: center;
-  gap: 0.3em;
 }
 
 .nowIcon {
   background-color: #e9e7e7;
-  width: 5em;
-  height: 5em;
+  width: 5.5em;
+  height: 5.5em;
   box-shadow: 0 1px 2px 1px #c7c4c4;
 }
 
 .currentWeatherText {
   font-size: 1.2em;
   white-space: nowrap;
-  padding: 0.2em;
+  padding: 0 0.2em;
+  align-self: center;
 }
 
 .extrasContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   margin-left: 0.5em;
   margin-right: 0.7em;
 }
