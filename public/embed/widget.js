@@ -39,7 +39,7 @@ container.setAttribute(
       const bundleScript = document.createElement('script');
       bundleScript.type = 'text/javascript';
       bundleScript.src =
-        'https://weather-widget-pied.vercel.app/assets/index-CLFWoGlj.js';
+        'https://weather-widget-pied.vercel.app/assets/index-i5z2Tht9.js';
 
       bundleScript.onload = function () {
         if (window.initWeatherWidget) {
