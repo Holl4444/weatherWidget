@@ -1,25 +1,25 @@
 .weekDaysContainer {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-evenly;
-    gap: 0.3rem;
-    margin-left: 0.5rem;
-    width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-evenly;
+  gap: 0.3rem;
+  margin-left: 0.5rem;
+  width: 100%;
 }
 
 .weekDays {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .weekday {
-   height: 4rem;
-   background-color: #e9e7e7;
-   margin-top: 0.3rem;
-   box-shadow: 0 1px 2px 1px #c7c4c4;
+  height: 4rem;
+  background-color: #e9e7e7;
+  margin-top: 0.3rem;
+  box-shadow: 0 1px 2px 1px #c7c4c4;
 }
 .weekDateText {
-    white-space: nowrap;        
-    font-size: min(1rem, 100%);
+  white-space: nowrap;
+  font-size: min(1rem, 100%);
 }
