@@ -1,6 +1,13 @@
-# Weather Widget 🍍
+# Weather Widget
 
 A lightweight, embeddable weather widget built with React.
+
+## Features
+- Dynamic location detection from NT property Google Maps links
+- Weather forecasts for each property
+- Fallback to The Pineapple 🍍 if location not found
+- Secure headers and content delivery
+- Proper React/ReactDOM loading management
 
 ## Implementation Journey
 
@@ -10,10 +17,16 @@ The widget uses direct script embedding with managed dependencies:
 <script src="https://weather-widget-pied.vercel.app/embed/widget.js"></script>
 ```
 
-Key features:
-- Proper React/ReactDOM loading sequence
-- Controlled script dependency management
-- Secure headers and content delivery
+### Location Handling
+The widget extracts coordinates from National Trust property pages:
+```javascript
+// From property's "Get Directions" link
+destination=54.68729%2C-6.657566
+```
+
+Fallback Location:
+- The Pineapple, Dunmore (56.0729, -3.8326)
+- A folly built in 1761 near Airth, Scotland
 
 ### Development History
 
@@ -21,7 +34,7 @@ Key features:
 First attempt using pure DOM manipulation:
 ```javascript
 document.createElement('div')
-// Direct DOM manipulation proved limiting
+// Direct DOM manipulation was fun but limiting
 ```
 **Lessons**: While straightforward, lacked component reusability and state management and George said I'd be working with React!
 
