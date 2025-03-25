@@ -1,8 +1,7 @@
 .weatherContainer {
   height: 8rem;
   width: 100%;
-  /* todayContainer: 7rem, extrasContainer: 8rem margins/gaps: 1rem weekdays: 4rem x 5 (20rem) margins/gaps: 1rem = 37*/
-  max-width: 43rem;
+  max-width: 0;
   display: flex;
   gap: 0.3rem;
 }

@@ -7,8 +7,9 @@
 
   container.setAttribute(
     'style',
-    'display: flex; justify-content: center; align-items: center; background-color: #fff; padding: 1rem; margin-top: 0 auto; width: 100%; box-shadow: 0 0.0625rem 0.1875rem #00000014; border-radius: 0.25rem'
+    'display: flex; justify-content: center; align-items: center; background-color: #fff; padding: 1rem; margin: 1rem 0; width: 100%; box-shadow: 0 0.0625rem 0.1875rem #00000014; border-radius: 0.25rem'
   );
+
 
   // Add container right after script
   document.currentScript.insertAdjacentElement('afterend', container);
@@ -56,7 +57,6 @@
 
   document.head.appendChild(reactScript);
 })();
-
 
 function getSiteLocation() {
   const mapLink = document.querySelector('a[href*="maps/dir"]');
