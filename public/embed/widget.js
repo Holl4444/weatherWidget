@@ -7,7 +7,7 @@
 
   container.setAttribute(
     'style',
-    'display: flex; justify-content: center; align-items: center; background-color: #fff; padding: 1em; width: 100%; min-width: 0; font-size: 16px; box-sizing: border-box; box-shadow: 0 0.0625rem 0.1875rem #00000014; border-radius: 0.25rem'
+    'display: flex; justify-content: center; align-items: center; background-color: #fff; padding: 1em; width: 100%; font-size: 16px; box-sizing: border-box; box-shadow: 0 0.0625rem 0.1875rem #00000014; border-radius: 0.25rem'
   );
 
   // Add container right after script
@@ -27,7 +27,7 @@
       const bundleScript = document.createElement('script');
       bundleScript.type = 'text/javascript';
       bundleScript.src =
-        'https://weather-widget-pied.vercel.app/assets/index-66yo9z4l.js';
+        'https://weather-widget-pied.vercel.app/assets/index-DKmRxE7l.js';
 
       bundleScript.onload = function () {
         if (window.initWeatherWidget) {
