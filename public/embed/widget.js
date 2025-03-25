@@ -5,22 +5,10 @@
 
   // Use flex layout with complete centering
 
-container.setAttribute(
-  'style',
-  'display: flex; \
-   justify-content: center; \
-   align-items: center; \
-   background-color: #fff; \
-   padding: 1em; \
-   margin: 1em auto; \
-   width: 80%; \
-   min-width: 0; \
-   box-sizing: border-box; \
-   font-size: 16px; \
-   * { box-sizing: border-box; margin: 0; padding: 0; } \
-   box-shadow: 0 0.0625rem 0.1875rem #00000014; \
-   border-radius: 0.25rem'
-);
+  container.setAttribute(
+    'style',
+    'display: flex; justify-content: center; align-items: center; background-color: #fff; padding: 1em; margin: 1em auto; width: 100%; min-width: 0; box-sizing: border-box; box-shadow: 0 0.0625rem 0.1875rem #00000014; border-radius: 0.25rem'
+  );
 
   // Add container right after script
   document.currentScript.insertAdjacentElement('afterend', container);
@@ -39,7 +27,7 @@ container.setAttribute(
       const bundleScript = document.createElement('script');
       bundleScript.type = 'text/javascript';
       bundleScript.src =
-        'https://weather-widget-pied.vercel.app/assets/index-i5z2Tht9.js';
+        'https://weather-widget-pied.vercel.app/assets/index-CLFWoGlj.js';
 
       bundleScript.onload = function () {
         if (window.initWeatherWidget) {
