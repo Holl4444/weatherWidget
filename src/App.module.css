@@ -1,6 +1,9 @@
 .weatherContainer {
-  height: 8rem;
+  height: 8em;
   width: 100%;
+  margin: 1em;
   display: flex;
-  gap: 0.3rem;
+  justify-content: center;
+  gap: 0.3em;
+ /* Base scaling factor for widget */
 }

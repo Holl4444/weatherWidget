@@ -1,10 +1,9 @@
 .weekDaysContainer {
   display: flex;
   align-items: flex-end;
-  justify-content: space-evenly;
-  gap: 0.3rem;
-  margin-left: 0.5rem;
-  width: 100%;
+  justify-content: center;
+  gap: 0.7em;
+
 }
 
 .weekDays {
@@ -14,7 +13,9 @@
 }
 
 .weekday {
-  height: 4rem;
+  height: 4em; /* Using em instead of rem to scale with parent */
+  width: 4em;
+  
   background-color: #e9e7e7;
   margin-top: 0.3rem;
   box-shadow: 0 1px 2px 1px #c7c4c4;
@@ -22,5 +23,5 @@
 
 .weekDateText {
   white-space: nowrap;
-  font-size: min(0.9rem, 100%);
+  font-size: 1.2em;
 }
