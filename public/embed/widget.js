@@ -4,6 +4,15 @@
   // Create container
   const container = document.createElement('div');
   container.id = `weather-widget-${Date.now()}`;
+
+  // Add subtle card styling
+  container.style.backgroundColor = '#ffffff';
+  container.style.padding = '12px';
+  container.style.margin = '12px 0';
+  container.style.maxWidth = '400px';
+  container.style.boxShadow = '0 1px 3px rgba(0,0,0,0.08)';
+  container.style.borderRadius = '4px';
+
   document.currentScript.insertAdjacentElement('afterend', container);
 
   // Load React and ReactDOM
