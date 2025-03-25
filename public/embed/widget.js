@@ -10,7 +10,7 @@
     'display: flex; justifyContent: center; alignItems: center; backgroundColor: #fff; padding: 1rem; margin: 1rem 0; width: fit-content; boxshadow: 0 0.0625rem 0.1875rem #00000014; borderRadius: 0.25rem'
   );
 
-  document.currentScript.insertAdjacentElement('afterend', container);
+  document.currentScript.insertAdjacentElement('beforeend', container);
 
   // Load React and ReactDOM
   const reactScript = document.createElement('script');
