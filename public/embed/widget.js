@@ -1,18 +1,15 @@
 (function () {
-  console.warn('🌤️ WEATHER WIDGET: Starting...');
-
-  // Create container
+  // Create container with flex layout
   const container = document.createElement('div');
   container.id = `weather-widget-${Date.now()}`;
 
-  // Add subtle card styling with min-width to prevent squishing
+  // Use flex layout with content-based sizing
+  container.style.display = 'flex';
+  container.style.justifyContent = 'center';
   container.style.backgroundColor = '#ffffff';
   container.style.padding = '16px';
   container.style.margin = '16px 0';
-  container.style.maxWidth = '400px';
-  container.style.minWidth = '280px'; // Prevent content squishing
-  container.style.width = '100%'; // Allow responsive sizing
-  container.style.boxSizing = 'border-box'; // Include padding in width
+  container.style.width = 'fit-content'; // Size to content
   container.style.boxShadow = '0 1px 3px rgba(0,0,0,0.08)';
   container.style.borderRadius = '4px';
 
@@ -36,21 +33,15 @@
 
       bundleScript.onload = function () {
         if (window.initWeatherWidget) {
-          const observer = new MutationObserver((mutations) => {
-            console.warn('🌤️ Container mutation:', {
-              childNodes: container.childNodes.length,
-              mutations: mutations.map((m) => ({
-                type: m.type,
-                target: m.target.nodeName,
-              })),
+          // Single mutation observer for development
+          if (bundleScript.src.includes('development')) {
+            const observer = new MutationObserver(() => {});
+            observer.observe(container, {
+              childList: true,
+              subtree: true,
             });
-          });
-
-          observer.observe(container, {
-            childList: true,
-            subtree: true,
-          });
-          window.initWeatherWidget({ container, debug: true });
+          }
+          window.initWeatherWidget({ container });
         }
       };
 
