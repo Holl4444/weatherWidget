@@ -33,7 +33,7 @@
 }
 
 .currentWeatherText {
-    font-size: min(0.7rem, 80%);
+    font-size: min(0.9rem, 100%);
     white-space: nowrap;
 }
 
