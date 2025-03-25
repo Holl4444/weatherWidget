@@ -1,7 +1,6 @@
 .weatherContainer {
   height: 8rem;
   width: 100%;
-  max-width: 0;
   display: flex;
   gap: 0.3rem;
 }
