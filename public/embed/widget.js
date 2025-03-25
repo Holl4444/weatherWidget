@@ -27,7 +27,7 @@
       const bundleScript = document.createElement('script');
       bundleScript.type = 'text/javascript';
       bundleScript.src =
-        'https://weather-widget-pied.vercel.app/assets/index-C5NluV_1.js';
+        'https://weather-widget-pied.vercel.app/assets/index-Bl3vZgX_.js';
 
       bundleScript.onload = function () {
         if (window.initWeatherWidget) {
