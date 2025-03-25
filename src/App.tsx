@@ -3,6 +3,7 @@ import styles from './App.module.css';
 import Current from './components/Current';
 import WeekAhead from './components/WeekAhead';
 import { ThreeHourResponse } from './utils/Types'; // Type for API data
+import { Analytics, track } from '@vercel/analytics/react'
 
 interface WeatherContextType {
   weatherData: ThreeHourResponse | undefined;
@@ -33,6 +34,7 @@ const App = ({ coords }: coordProps) => {
   const [error, setError] = useState<string | null>(null);
   // Fetch weather info as though from a real API:
   useEffect(() => {
+
     const apiCall = async () => {
       // Fallback coords to Castle Drogo - England's newest castle (1930)!
       const lat = coords?.lat ?? 50.6816;
@@ -75,10 +77,21 @@ const App = ({ coords }: coordProps) => {
       ) : !weatherData ? (
         <div>No weatherData available</div>
       ) : (
-        <div className={styles.weatherContainer}>
-          <Current />
-          <WeekAhead />
-        </div>
+        <>
+                <div className={styles.weatherContainer}
+                  onMouseEnter={() => { // track hover for vercel analytics
+                    const locationName = window.location.pathname.split('/').pop() || 'unknown-location';
+                    track('widget-hover', {
+                      propertyId: locationName,
+                      timestamp: new Date().toISOString()
+                    });
+                  }}
+            >
+            <Current />
+            <WeekAhead />
+          </div>
+          <Analytics />
+        </>
       )}
     </WeatherContext.Provider>
   );
