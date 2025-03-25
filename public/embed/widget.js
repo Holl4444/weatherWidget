@@ -1,7 +1,9 @@
 (function () {
-  // Create container
+  // Create container with flex layout
   const container = document.createElement('div');
   container.id = `weather-widget-${Date.now()}`;
+
+  // Use flex layout with complete centering
 
   container.setAttribute(
     'style',
@@ -22,42 +24,26 @@
       'https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js';
 
     reactDomScript.onload = function () {
-      // Fetch the manifest as part of automating src to update
-      const manifestRequest = new XMLHttpRequest();
-      manifestRequest.open(
-        'GET',
-        'https://weather-widget-pied.vercel.app/manifest.json',
-        true
-      );
+      const bundleScript = document.createElement('script');
+      bundleScript.type = 'text/javascript';
+      bundleScript.src =
+        'https://weather-widget-pied.vercel.app/assets/index-DVuy20L3.js';
 
-      // Automate updating the script src
-      manifestRequest.onload = function () {
-        if (manifestRequest.status === 200) {
-          const manifest = JSON.parse(manifestRequest.responseText);
-          const bundleScript = document.createElement('script');
-          bundleScript.type = 'text/javascript';
-          bundleScript.src =
-            'https://weather-widget-pied.vercel.app/' +
-            manifest['index.html'].file;
-
-          bundleScript.onload = function () {
-            if (window.initWeatherWidget) {
-              // Single mutation observer for development
-              if (bundleScript.src.includes('development')) {
-                const observer = new MutationObserver(() => {});
-                observer.observe(container, {
-                  childList: true,
-                  subtree: true,
-                });
-              }
-              window.initWeatherWidget({ container });
-            }
-          };
-
-          document.body.appendChild(bundleScript);
+      bundleScript.onload = function () {
+        if (window.initWeatherWidget) {
+          // Single mutation observer for development
+          if (bundleScript.src.includes('development')) {
+            const observer = new MutationObserver(() => {});
+            observer.observe(container, {
+              childList: true,
+              subtree: true,
+            });
+          }
+          window.initWeatherWidget({ container });
         }
       };
-      manifestRequest.send();
+
+      document.body.appendChild(bundleScript);
     };
 
     document.head.appendChild(reactDomScript);
