@@ -1,31 +1,17 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './App.module.css';
 import Current from './components/Current';
 import WeekAhead from './components/WeekAhead';
 import { ThreeHourResponse } from './utils/Types'; // Type for API data
-import { Analytics, track } from '@vercel/analytics/react'
+import { Analytics, track } from '@vercel/analytics/react';
+import { WeatherContext } from './contexts/WeatherContext.ts';
 
-interface WeatherContextType {
-  weatherData: ThreeHourResponse | undefined;
-  error: string | null;
-}
 
 interface coordProps {
   coords?: {
     lat: number;
     lon: number;
   };
-}
-
-const WeatherContext = createContext<WeatherContextType | undefined>(undefined); // Creates context for the hook useWeather - undefined is the default value - this is where the .Provider container component comes from
-
-// export the hook to be used in other components
-export function useWeather() {
-  const context = useContext(WeatherContext);
-  if (!context) {
-    throw new Error('useWeather must be used within WeatherProvider');
-  }
-  return context;
 }
 
 const App = ({ coords }: coordProps) => {
@@ -73,6 +59,7 @@ const App = ({ coords }: coordProps) => {
     apiCall();
   }, [coords]);
 
+  // Sadly I think this is failing because of security policies.
   useEffect(() => {
     // Add listener when component mounts
     const accordion = document.querySelector(
