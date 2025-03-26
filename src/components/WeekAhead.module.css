@@ -14,8 +14,7 @@
 .weekday {
   height: 4em; /* Using em instead of rem to scale with parent */
   width: 4em;
-  
-  background-color: #e9e7e7;
+  background-color: #edece9;
   margin-top: 0.3rem;
   box-shadow: 0 1px 2px 1px #c7c4c4;
 }
