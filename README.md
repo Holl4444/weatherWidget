@@ -6,15 +6,14 @@ A lightweight, embeddable weather widget built with React for National Trust pro
 
 ## Quick Start
 ```html
-const openingTimesDiv = document.querySelector('[ data-testid="place-summary-links"]');
-if (openingTimesDiv) {
+const entryPoint = document.querySelector('[ data-testid="place-summary-links"]');
+if (entryPoint) {
 
-  openingTimesDiv.setAttribute("style", 'display: flex; flex-direction: column; justify-content: space-between;');
+  entryPoint.setAttribute("style", 'display: flex; flex-direction: column; justify-content: space-between;');
   
   const script = document.createElement('script');
   script.src = 'https://weather-widget-pied.vercel.app/embed/widget.js';
-  openingTimesDiv.insertAdjacentElement('beforeend', script);
-  console.warn('🌤️ Widget script injected after opening times table');
+  entryPoint.insertAdjacentElement('beforeend', script);
 }
 ```
 
