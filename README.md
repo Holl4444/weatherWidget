@@ -6,7 +6,15 @@ A lightweight, embeddable weather widget built with React for National Trust pro
 
 ## Quick Start
 ```html
-<script src="https://weather-widget-one-roan.vercel.app/embed/widget.js"></script>
+const entryPoint = document.querySelector('[ data-testid="place-summary-links"]');
+if (entryPoint) {
+
+  entryPoint.setAttribute("style", 'display: flex; flex-direction: column; justify-content: space-between;');
+  
+  const script = document.createElement('script');
+  script.src = 'https://weather-widget-one-roan.vercel.app//embed/widget.js';
+  entryPoint.insertAdjacentElement('beforeend', script);
+}
 ```
 
 - [Features](#features)
@@ -15,7 +23,7 @@ A lightweight, embeddable weather widget built with React for National Trust pro
 - [Implementation](#implementation)
 - [Technical Details](#technical-details)
 - [Developers](#developers)
-- [The Process in Pics]{#the-process-in-pics}
+- [The Process in Pics](#process-in-pics)
 
 
 ## Features
