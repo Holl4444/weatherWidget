@@ -12,7 +12,7 @@ if (entryPoint) {
   entryPoint.setAttribute("style", 'display: flex; flex-direction: column; justify-content: space-between;');
   
   const script = document.createElement('script');
-  script.src = 'https://weather-widget-pied.vercel.app/embed/widget.js';
+  script.src = 'https://weather-widget-one-roan.vercel.app//embed/widget.js';
   entryPoint.insertAdjacentElement('beforeend', script);
 }
 ```
