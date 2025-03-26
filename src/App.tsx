@@ -105,7 +105,7 @@ const App = ({ coords }: coordProps) => {
                   propertyId:
                     window.location.pathname.split('/').pop() ||
                     'unknown-location',
-                  timestamp: new Date().toISOString(),
+                  // { timestamp: new Date().toISOString(), }}
                   hoverCount: newCount,
                 });
                 return newCount;
