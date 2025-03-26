@@ -75,7 +75,9 @@ const App = ({ coords }: coordProps) => {
 
   useEffect(() => {
     // Add listener when component mounts
-    const accordion = document.querySelector('.glFdsV');
+    const accordion = document.querySelector(
+      '.Accordionstyle__StyledAccordionsList-sc-5agikf-2 glFdsV'
+    );
     const handleClick = (event: Event) => {
       const accordionItem = (event.target as Element).closest('li');
       if (accordionItem) {
