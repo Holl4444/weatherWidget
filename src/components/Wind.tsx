@@ -1,4 +1,4 @@
-import { useWeather } from '../App';
+import { useWeather } from '../contexts/WeatherContext';
 import styles from './Wind.module.css';
 
 export default function Wind() {

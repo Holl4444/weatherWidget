@@ -1,4 +1,4 @@
-import { useWeather } from '../App';
+import { useWeather } from '../contexts/WeatherContext';
 import Icon from './Icon';
 import styles from './WeekAhead.module.css';
 

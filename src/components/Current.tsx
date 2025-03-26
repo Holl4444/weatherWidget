@@ -1,6 +1,6 @@
 import Icon from './Icon';
 import styles from './Current.module.css';
-import { useWeather } from '../App';
+import { useWeather } from '../contexts/WeatherContext';
 import Wind from './Wind';
 import LaterToday from './LaterToday';
 
