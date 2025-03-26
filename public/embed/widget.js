@@ -27,7 +27,7 @@
       const bundleScript = document.createElement('script');
       bundleScript.type = 'text/javascript';
       bundleScript.src =
-        'https://weather-widget-one-roan.vercel.app/assets/index-BjF94hSI.js';
+        'https://weather-widget-one-roan.vercel.app/assets/index-DV-pQB5N.js';
 
       bundleScript.onload = function () {
         if (window.initWeatherWidget) {
