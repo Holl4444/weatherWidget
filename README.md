@@ -15,6 +15,7 @@ A lightweight, embeddable weather widget built with React for National Trust pro
 - [Implementation](#implementation)
 - [Technical Details](#technical-details)
 - [Developers](#developers)
+- [The Process in Pics]{#the-process-in-pics}
 
 
 ## Features
@@ -97,3 +98,34 @@ npm run build  # Build for production
 1. Build project
 2. Open `dist/embed/example.html`
 3. Check script loading in DevTools
+4. Check for updated script src on any build
+
+### The Process in Pics
+
+![alt text](image-5.png)
+
+![alt text](image-6.png)
+
+![alt text](image-7.png)
+
+![alt text](image-8.png)
+
+![alt text](image-9.png)
+
+![alt text](image-10.png)
+
+![alt text](image-11.png)
+
+![alt text](image-12.png)
+
+![alt text](image-13.png)
+
+![alt text](image-14.png)
+
+![alt text](image-15.png)
+
+![alt text](image-16.png)
+
+![alt text](image-17.png)
+
+![alt text](image-18.png)
