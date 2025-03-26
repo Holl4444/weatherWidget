@@ -32,7 +32,11 @@ const App = ({ coords }: coordProps) => {
   const [weatherData, setWeatherData] = useState<ThreeHourResponse>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [hoverCount, setHoverCount] = useState(0) // Track session hovers
+  const [hoverCount, setHoverCount] = useState<number>(0);
+
+  if (hoverCount) {
+    console.log('TS you fiend!')
+  }
 
   // Fetch weather info as though from a real API:
   useEffect(() => {
@@ -107,13 +111,15 @@ const App = ({ coords }: coordProps) => {
             className={styles.weatherContainer}
             onMouseEnter={() => {
               setHoverCount((prev) => {
+                const newCount = prev + 1;
                 track('widget-hover', {
-                  propertyId: window.location.pathname.split('/').pop() //browser window -> current url info -> url path
-                    || 'unknown-location',
+                  propertyId:
+                    window.location.pathname.split('/').pop() ||
+                    'unknown-location',
                   timestamp: new Date().toISOString(),
-                  hoverCount: prev + 1,
+                  hoverCount: newCount,
                 });
-                return prev + 1; //updating hoverCount
+                return newCount;
               });
             }}
           >
