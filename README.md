@@ -15,7 +15,7 @@ A lightweight, embeddable weather widget built with React for National Trust pro
 - [Implementation](#implementation)
 - [Technical Details](#technical-details)
 - [Developers](#developers)
-- [The Process in Pics]{#the-process-in-pics}
+- [The Process in Pics]{#process-in-pics}
 
 
 ## Features
