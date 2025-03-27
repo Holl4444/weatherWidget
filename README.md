@@ -1,5 +1,6 @@
 # Weather Widget
-![alt text](image-15.png)
+
+![alt text](image-18.png)
 
 ## Overview
 A lightweight, embeddable weather widget built with React for National Trust property pages.
@@ -136,4 +137,4 @@ npm run build  # Build for production
 
 ![alt text](image-17.png)
 
-![alt text](image-18.png)
+
